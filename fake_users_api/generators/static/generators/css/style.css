@@ -1,0 +1,225 @@
+@charset "UTF-8";
+/*Обнуление*/
+* {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+:focus, :active {
+  outline: none;
+}
+
+a:focus, a:active {
+  outline: none;
+}
+
+nav, footer, header, aside {
+  display: block;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  font-size: 100%;
+  line-height: 1;
+  font-size: 14px;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+input, button, textarea {
+  font-family: inherit;
+}
+
+input::-ms-clear {
+  display: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+button::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+
+a, a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+ul li {
+  list-style: none;
+}
+
+img {
+  vertical-align: top;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-size: inherit;
+  font-weight: 400;
+}
+
+/*--------------------*/
+body {
+  font-family: Viga;
+  display: flex;
+  flex-direction: column;
+  font-size: 18px;
+}
+@media (max-width: 1070px) {
+  body {
+    padding: 0 15px;
+  }
+}
+
+._container {
+  max-width: 1046px;
+  margin: 0 auto;
+}
+
+.info-img {
+  width: 19px;
+  height: 19px;
+}
+
+.header {
+  padding: 30px 0 0 0;
+  font-size: 16px;
+}
+.header .header__content {
+  display: flex;
+  align-items: center;
+  -moz-column-gap: 200px;
+       column-gap: 200px;
+}
+.header .header__content .header__logo {
+  position: relative;
+  bottom: 17px;
+}
+.header .header__content .header__logo img {
+  width: 60px;
+  height: 60px;
+}
+.header .header__content .header__menu .menu__list {
+  display: flex;
+  -moz-column-gap: 20px;
+       column-gap: 20px;
+}
+.header .header__content .header__menu .menu__list .menu__item .menu__link {
+  color: #000;
+  text-transform: uppercase;
+}
+
+.content {
+  padding: 30px 0 0 0;
+  flex-grow: 1;
+  background-color: #FAFAFA;
+}
+.content .content__title {
+  text-align: center;
+  font-size: 48px;
+  margin: 0 0 30px 0;
+}
+.content .content__subtitle {
+  text-align: center;
+  font-size: 18px;
+}
+.content .generator_password {
+  margin: 50px 0 0 0;
+}
+.content .generator_password .received_password_block {
+  display: flex;
+  margin: 0 auto;
+  max-width: 800px;
+  padding: 30px 25px;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid black;
+}
+.content .generator_password .received_password_block .received_password_block__text {
+  font-size: 48px;
+}
+.content .generator_password .received_password_block .received_password_block__icons svg {
+  height: 32px;
+  width: 32px;
+}
+.content .generator_password .received_password_block .received_password_block__icons svg:not(:last-child) {
+  margin: 0 15px 0 0;
+}
+.content .generator_password .form_password_block {
+  max-width: 800px;
+  margin: 30px auto 0 auto;
+  border: 1px solid black;
+  padding: 15px 25px;
+}
+.content .generator_password .form_password_block .form_password_block__text {
+  font-size: 25px;
+  margin: 0 0 20px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.349);
+  line-height: 60px;
+}
+.content .generator_password .form_password_block .form {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.content .generator_password .form_password_block .form .length_password {
+  display: flex;
+  -moz-column-gap: 12px;
+       column-gap: 12px;
+}
+.content .generator_password .form_password_block .form .length_password input.length_password__number {
+  border: 1px solid black;
+  padding: 8px;
+  font-size: 18px;
+  text-align: center;
+  width: 67px;
+  height: 42px;
+}
+.content .generator_password .form_password_block .form .presets_radio {
+  display: flex;
+  flex-direction: column;
+}
+.content .generator_password .form_password_block .form .presets_radio .preset {
+  position: relative;
+}
+.content .generator_password .form_password_block .form .presets_radio .preset .preset__info {
+  display: none;
+  position: absolute;
+  width: 155px;
+  border: 1px solid black;
+  background-color: #FAFAFA;
+  max-width: none;
+  top: -5px;
+  left: 130px;
+  font-size: 16px;
+}
+.content .generator_password .form_password_block .form .presets_radio .preset:nth-child(1) .preset__info {
+  z-index: 4;
+}
+.content .generator_password .form_password_block .form .presets_radio .preset:nth-child(2) .preset__info {
+  width: 200px;
+  z-index: 4;
+  left: 140px;
+}
+.content .generator_password .form_password_block .form .presets_radio .preset:nth-child(3) .preset__info {
+  width: 129px;
+  left: 152px;
+  z-index: 4;
+}
+.content .generator_password .form_password_block .form .settings_password {
+  display: flex;
+  flex-direction: column;
+}

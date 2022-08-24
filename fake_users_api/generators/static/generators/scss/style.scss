@@ -1,0 +1,177 @@
+@import "nullstyle";
+
+body {
+    font-family: Viga;
+    display: flex;
+    flex-direction: column;
+    font-size: 18px;
+    @media(max-width: 1070px) {
+        padding: 0 15px;
+    }
+}
+
+._container {
+    max-width: 1046px;
+    margin: 0 auto;
+}
+
+.info-img {
+    width: 19px;
+    height: 19px;
+}
+
+.header {
+    padding: 30px 0 0 0;
+    font-size: 16px;
+    & .header__content {
+        display: flex;
+        align-items: center;
+        column-gap: 200px;
+        & .header__logo {
+            position: relative;
+            bottom: 17px;
+            & img {
+                width: 60px;
+                height: 60px;
+            }
+        }
+
+        & .header__menu{
+            & .menu__list {
+                display: flex;
+                column-gap: 20px;
+                & .menu__item {
+                    & .menu__link {
+                        color: #000;
+                        text-transform: uppercase;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+.content {
+    padding: 30px 0 0 0;
+    flex-grow: 1;
+    background-color: #FAFAFA;
+    & .content__title {
+        text-align: center;
+        font-size: 48px;
+        margin: 0 0 30px 0;
+        
+    }
+    & .content__subtitle {
+        text-align: center;
+        font-size: 18px;
+    }
+
+    & .generator_password{
+        margin: 50px 0 0 0;
+        & .received_password_block{
+            display: flex;
+            margin: 0 auto;
+            max-width: 800px;
+            padding: 30px 25px;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid black;
+            
+            & .received_password_block__text {
+                font-size: 48px;
+            }
+            
+            & .received_password_block__icons {
+                & svg {
+                    height: 32px;
+                    width: 32px;
+                    
+                    &:not(:last-child){
+                        margin: 0 15px 0 0;
+                    }
+                }
+
+
+            }
+        }
+
+        & .form_password_block{
+            max-width: 800px;
+            margin: 30px auto 0 auto;
+            border: 1px solid black;
+            padding: 15px 25px;
+
+            & .form_password_block__text{
+                font-size: 25px;
+                margin: 0 0 20px 0;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.349);
+                line-height:60px;
+            }
+
+            & .form {
+                display: flex;
+                // column-gap: 20px;
+                align-items: center;
+                justify-content: space-around;
+                & .length_password {
+                    display: flex;
+                    column-gap: 12px;
+                    & input.length_password__number {
+                        border: 1px solid black;
+                        padding: 8px;
+                        font-size: 18px;
+                        text-align: center;
+                        width: 67px;
+                        height: 42px;
+                    }
+                    & input.length_password__range {
+                        
+                    }
+                }
+
+                & .presets_radio {
+                    display: flex;
+                    flex-direction: column;
+                    & .preset {
+                        position: relative;
+                        & .preset__info {
+                            display: none;
+                            position: absolute;
+                            border: 1px solid black;
+                            background-color: #FAFAFA;
+                            max-width: none;
+                            top: -5px;
+                            font-size: 16px;
+                        }
+
+                        &:nth-child(1) .preset__info {
+                            width: 155px;
+                            left: 130px;
+                            z-index: 4;
+                        }
+                        &:nth-child(2) .preset__info {
+                            width: 200px;
+                            z-index: 4;
+                            left: 140px;
+                        }
+                        &:nth-child(3) .preset__info {
+                            width: 129px;
+                            left: 152px;
+                            z-index: 4;
+                        }
+                    }
+
+                    
+                }
+
+                & .settings_password {
+                    display: flex;
+                    flex-direction: column;
+                }
+            }
+        }
+    }
+
+
+}
