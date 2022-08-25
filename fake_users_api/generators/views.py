@@ -5,6 +5,7 @@ from . import serialzers
 from . import utils
 from rest_framework import status
 
+
 class TemplateView(generic.TemplateView):
     template_name = "password.html"
     def get_context_data(self, **kwargs):
