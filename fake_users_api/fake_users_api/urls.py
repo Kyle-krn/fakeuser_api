@@ -25,6 +25,6 @@ schema_view = get_swagger_view(title='Pastebin API')
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('generators/', include('generators.urls', namespace="generators")),
-    path('parse/', include('parse.urls')),
+    path('parse/', include('parse.urls', namespace="parse")),
     path('swagger/', schema_view)
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

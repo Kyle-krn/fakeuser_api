@@ -5,19 +5,37 @@
     <div class="_container">
         <div class="content__group__title title">List VK group</div>
         <div class="content__group__subtitle subtitle">Enter or select a group from the list</div>
-        <form action="#" method="post">
+        <form action="" method="post">
+            {% csrf_token %}
+            {{form.group_id.errors}}
             <div class="input-with-btn">
-                <input type="text" placeholder="Enter VK group">
+                <input type="text" name="group_id" placeholder="Enter VK group" required>
+                
                 <button type="submit" class="input-btn btn"><img src="{% static "img/icons/ok.svg" %}" alt="" class="svg"></button>
             </div>
         </form>
         <ul class="group__list">
-            <li class="group__item"><a class="group__link" href="#"><img src="{% static "img/icons/group.svg" %}" alt="" class="svg group_icon">Tsdfsdgvegest</a></li>
-            <li class="group__item"><a class="group__link" href="#"><img src="{% static "img/icons/group.svg" %}" alt="" class="svg group_icon">Tesdsgst</a></li>
-            <li class="group__item"><a class="group__link" href="#"><img src="{% static "img/icons/group.svg" %}" alt="" class="svg group_icon">Testdf</a></li>
-            <li class="group__item"><a class="group__link" href="#"><img src="{% static "img/icons/group.svg" %}" alt="" class="svg group_icon">Test</a></li>
-            <li class="group__item"><a class="group__link" href="#"><img src="{% static "img/icons/group.svg" %}" alt="" class="svg group_icon">Tessdfsdgsdgsdgsdgt</a></li>
+            {% for group in groups %}
+                <li class="group__item"><a class="group__link" href="#"><img src="{% static "img/icons/group.svg" %}" alt="" class="svg group_icon">{{group.group_name}}</a></li>
+            {% endfor %}
         </ul>
+        {% if is_paginated %}
+            <ul class="pagination">
+                <a class="pagination__link" 
+                href={% if page_obj.has_previous %}"?page={{ page_obj.previous_page_number }}"{% else %}"#"{% endif %}>
+                    <li class="pagination__item">&laquo;</li>
+                </a>
+                {% for i in paginator.page_range %}
+                    {% if page_obj.number == i %}
+                        <a class="pagination__link active" href="#"><li class="pagination__item"><span>{{ i }}</span></li></a>
+                    {% else %}
+                        <a class="pagination__link" href="?page={{ i }}"><li class="pagination__item">{{ i }}</li></a>
+                    {% endif %}
+                {% endfor %}
+                <a class="pagination__link" 
+                href={% if page_obj.has_next %}"?page={{ page_obj.next_page_number }}"{% else %}"#"{% endif %}><li class="pagination__item">&raquo;</li></a>
+            </ul>
+        {% endif %}
     </div>
 </div>
 {% endblock %}

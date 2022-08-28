@@ -106,17 +106,17 @@ a {
   text-transform: uppercase;
 }
 
-.content .content__title {
+.content__password .content__title {
   margin: 0 0 30px 0;
 }
-.content .content__subtitle {
+.content__password .content__subtitle {
   text-align: center;
   font-size: 18px;
 }
-.content .generator_password {
+.content__password .generator_password {
   margin: 50px 0 0 0;
 }
-.content .generator_password .received_password_block {
+.content__password .generator_password .received_password_block {
   display: flex;
   margin: 0 auto;
   max-width: 800px;
@@ -126,29 +126,29 @@ a {
   border: 1px solid black;
   overflow: hidden;
 }
-.content .generator_password .received_password_block .received_password_block__text {
+.content__password .generator_password .received_password_block .received_password_block__text {
   position: relative;
   font-size: 40px;
   overflow: hidden;
   white-space: nowrap;
 }
-.content .generator_password .received_password_block .received_password_block__icons {
+.content__password .generator_password .received_password_block .received_password_block__icons {
   display: flex;
   -moz-column-gap: 15px;
        column-gap: 15px;
 }
-.content .generator_password .received_password_block .received_password_block__icons svg {
+.content__password .generator_password .received_password_block .received_password_block__icons svg {
   height: 32px;
   width: 32px;
   transition-duration: 1s;
 }
-.content .generator_password .form_password_block {
+.content__password .generator_password .form_password_block {
   max-width: 800px;
   margin: 30px auto 0 auto;
   border: 1px solid black;
   padding: 15px 25px;
 }
-.content .generator_password .form_password_block .form_password_block__text {
+.content__password .generator_password .form_password_block .form_password_block__text {
   font-size: 25px;
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -158,24 +158,24 @@ a {
   border-bottom: 1px solid rgba(0, 0, 0, 0.349);
   line-height: 60px;
 }
-.content .generator_password .form_password_block .form {
+.content__password .generator_password .form_password_block .form {
   display: flex;
   align-items: center;
   justify-content: space-around;
 }
-.content .generator_password .form_password_block .form .length_password {
+.content__password .generator_password .form_password_block .form .length_password {
   display: flex;
   align-items: center;
   -moz-column-gap: 12px;
        column-gap: 12px;
 }
-.content .generator_password .form_password_block .form .length_password input.length_password__number {
+.content__password .generator_password .form_password_block .form .length_password input.length_password__number {
   border: 1px solid black;
   padding: 8px;
   font-size: 18px;
   text-align: center;
 }
-.content .generator_password .form_password_block .form .length_password input.length_password__range {
+.content__password .generator_password .form_password_block .form .length_password input.length_password__range {
   -webkit-appearance: none;
   width: 100%;
   height: 10px;
@@ -184,10 +184,10 @@ a {
   opacity: 0.7;
   transition: opacity 0.2s;
 }
-.content .generator_password .form_password_block .form .length_password input.length_password__range:hover {
+.content__password .generator_password .form_password_block .form .length_password input.length_password__range:hover {
   opacity: 1;
 }
-.content .generator_password .form_password_block .form .length_password input.length_password__range::-webkit-slider-thumb {
+.content__password .generator_password .form_password_block .form .length_password input.length_password__range::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
   width: 17px;
@@ -196,30 +196,30 @@ a {
   background: #04AA6D;
   cursor: pointer;
 }
-.content .generator_password .form_password_block .form .length_password input.length_password__range::-moz-range-thumb {
+.content__password .generator_password .form_password_block .form .length_password input.length_password__range::-moz-range-thumb {
   width: 17px;
   height: 17px;
   border-radius: 50%;
   background: #04AA6D;
   cursor: pointer;
 }
-.content .generator_password .form_password_block .form .presets_radio {
+.content__password .generator_password .form_password_block .form .presets_radio {
   display: flex;
   flex-direction: column;
   row-gap: 10px;
   z-index: 0;
 }
-.content .generator_password .form_password_block .form .presets_radio .preset {
+.content__password .generator_password .form_password_block .form .presets_radio .preset {
   position: relative;
 }
-.content .generator_password .form_password_block .form .presets_radio .preset .info-img {
+.content__password .generator_password .form_password_block .form .presets_radio .preset .info-img {
   width: 19px;
   height: 19px;
 }
-.content .generator_password .form_password_block .form .presets_radio .preset label input {
+.content__password .generator_password .form_password_block .form .presets_radio .preset label input {
   margin: 0 5px 0 0;
 }
-.content .generator_password .form_password_block .form .presets_radio .preset .preset__info {
+.content__password .generator_password .form_password_block .form .presets_radio .preset .preset__info {
   display: none;
   position: absolute;
   border: 1px solid black;
@@ -228,25 +228,37 @@ a {
   top: -5px;
   font-size: 16px;
 }
-.content .generator_password .form_password_block .form .presets_radio .preset:nth-child(1) .preset__info {
+.content__password .generator_password .form_password_block .form .presets_radio .preset:nth-child(1) .preset__info {
   width: 155px;
   left: 135px;
 }
-.content .generator_password .form_password_block .form .presets_radio .preset:nth-child(2) .preset__info {
+.content__password .generator_password .form_password_block .form .presets_radio .preset:nth-child(2) .preset__info {
   width: 200px;
   left: 145px;
 }
-.content .generator_password .form_password_block .form .presets_radio .preset:nth-child(3) .preset__info {
+.content__password .generator_password .form_password_block .form .presets_radio .preset:nth-child(3) .preset__info {
   width: 129px;
   left: 157px;
 }
-.content .generator_password .form_password_block .form .settings_password {
+.content__password .generator_password .form_password_block .form .settings_password {
   display: flex;
   flex-direction: column;
   row-gap: 6px;
 }
-.content .generator_password .form_password_block .form .settings_password label input {
+.content__password .generator_password .form_password_block .form .settings_password label input {
   margin: 0 5px 0 0;
+}
+
+.alert-copyied {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  background-color: white;
+  padding: 15px 20px;
+  border: 1px solid black;
+  border-radius: 5px;
+  transform: translate(-50%, -50%);
 }
 
 @media (max-width: 1000px) {
@@ -337,18 +349,6 @@ body {
   }
 }
 
-.alert-copyied {
-  display: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  background-color: white;
-  padding: 15px 20px;
-  border: 1px solid black;
-  border-radius: 5px;
-  transform: translate(-50%, -50%);
-}
-
 ._container {
   max-width: 1046px;
   margin: 0 auto;
@@ -377,6 +377,16 @@ body {
   background-color: #FAFAFA;
 }
 
+ul.errorlist {
+  color: red;
+}
+ul.errorlist li {
+  list-style-type: circle;
+}
+ul.errorlist li:not(:last-child) {
+  margin: 0 0 10px 0;
+}
+
 .content__parse {
   margin: 0 auto;
 }
@@ -402,6 +412,13 @@ body {
 }
 .content__group .content__group__subtitle {
   margin: 0 0 30px 0;
+}
+.content__group form .errorlist {
+  margin: 0 0 20px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .content__group form .input-with-btn {
   display: flex;
@@ -435,7 +452,7 @@ body {
   right: 2px;
 }
 .content__group .group__list {
-  margin: 40px 0 0 0;
+  margin: 40px 0 40px 0;
   display: flex;
   flex-direction: column;
   row-gap: 10px;
@@ -444,6 +461,27 @@ body {
   width: 25px;
   height: 25px;
   position: relative;
-  bottom: 4px;
+  top: 4px;
   margin: 0 10px 0 0;
+}
+
+ul.pagination {
+  display: flex;
+  justify-content: center;
+}
+ul.pagination .pagination__link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  border-top: 1px solid rgb(129, 129, 129);
+  border-bottom: 1px solid rgb(129, 129, 129);
+  border-left: 1px solid rgb(129, 129, 129);
+}
+ul.pagination .pagination__link:last-child {
+  border-right: 1px solid rgb(129, 129, 129);
+}
+ul.pagination .pagination__link.active {
+  background-color: rgb(86, 159, 255);
 }
