@@ -1,12 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    Hey!
-</body>
-</html>
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+    <div class="content">
+        <div class="content__parse">
+            <div class="_container">
+                <div class="parse__title title">Parse VK</div>
+                <div class="parse__subtitle subtitle">Total <span id="count_data"></span> raw data</div>
+            
+                <form action="#" method="post">
+                    {{form.group_id.errors}}
+                    {% csrf_token %}
+                    <div class="input-with-btn">
+                        <input type="text" name="group_id" placeholder="Enter VK group">
+                        <button type="submit" class="input-btn btn"><img src="{% static "img/icons/ok.svg" %}" alt="" class="svg"></button>
+                    </div>
+                </form>
+
+                <div class="parse_block">
+                    <div class="parse_block__photo" id="parse_block__photo">
+                        <p>
+                            <img rel="preload" src="{% static "img/avatar.svg" %}" alt="" id="vk_photo" class="parse_block__img">
+                        </p>
+                    </div>
+                    <div class="parse_block__name" id="parse_block__name">
+                        <div class="name_first"><span>First name:</span><span id="first_name">First name</span></div>       
+                        <div class="name_last"><span>Last name:</span><span id="last_name">Last name</span></div>       
+                    </div>
+                    <div class="parse_block__btn">
+                        <div class="btn_block__gender">
+                            <button id="female_btn" class="female_btn btn">Female <img src="{% static "img/icons/ok.svg" %}" alt="" class="svg"> </button>
+                            <button id="male_btn" class="male_btn btn">Male <img src="{% static "img/icons/ok.svg" %}" alt="" class="svg"></button>
+                        </div>
+
+                        <div class="btn_block__control">
+                            <button onclick="Next()" class="save_name_btn btn">Save name</button>
+                            <button class="save_photo_btn btn">Save photo</button>
+                            <button onclick="AjaxParseVk(true)" class="next_btn btn">Next</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<script src="{% static "js/parse_vk.js" %}"></script>
+{% endblock %}

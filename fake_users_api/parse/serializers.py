@@ -2,10 +2,11 @@ from rest_framework import serializers
 from . import models
 
 class VkGroupMemberOutputSerializer(serializers.ModelSerializer):
-    next_photo = serializers.URLField()
+    next_photo = serializers.URLField(allow_null=True)
+    count_data = serializers.IntegerField()
     class Meta:
         model = models.VkUserRawData
-        fields = ['user_id', 'first_name', 'last_name', 'photo_url', 'next_photo']
+        fields = ['user_id', 'first_name', 'last_name', 'photo_url', 'next_photo', 'count_data']
 
 
 class VkUserSavePhotoSerializer(serializers.Serializer):

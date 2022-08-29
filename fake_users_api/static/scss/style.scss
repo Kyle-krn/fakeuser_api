@@ -54,114 +54,11 @@ ul.errorlist {
 }
 
 
-.content__parse {
-    margin: 0 auto;
-    & .parse__title{
-        margin: 0 0 30px 0;
-    }
-
-    & .parse_block {
-        & .parse_block__photo{
-            // text-align: center;
-            margin: 0 auto 30px auto;
-            width: 400px;
-            height: 400px;
-            & img {
-
-            }
-        }
-
-        & .parse_block__name {
-            display: flex;
-            justify-content: space-between;
-            margin: 0 0 30px 0;
-            & .name_first {
-            }
-            & .name_last {
-            }
-        }
-
-        & .parse_block__btn {
-            display: flex;
-            justify-content: space-between;
-            & .save_name_btn{
-                
-            }
-            & .save_photo_btn{
-
-            }
-            & .next_btn{
-
-            }
-        }
-    }
-
-}
-
-.content__group {
-    & .content__group__title {
-        margin: 0 0 20px 0;
-    }
-    & .content__group__subtitle {
-        margin: 0 0 30px 0;
-    }
-    & form {
-        & .errorlist {
-            margin: 0 0 20px 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-        & .input-with-btn{
-            display: flex;
-            justify-content: center;
-            & input {
-                border: 1px solid black;
-                border-bottom-left-radius: 5px;
-                border-top-left-radius: 5px;
-                width: 500px;
-                height: 50px;
-                font-size: 25px;
-                padding: 0 10px;
-                &::placeholder {
-                    text-align: center;
-                }
-
-            }
-
-            & button {
-                border-bottom-left-radius: 0px;
-                border-top-left-radius: 0px;
-                width: 50px;
-                & svg {
-                    position: relative;
-                    right: 2px;
-                }
-            }
-        }
-    }
-    & .group__list {
-        margin: 40px 0 40px 0;
-        display: flex;
-        flex-direction: column;
-        
-        row-gap: 10px;
-        & .group__item {
-            & .group__link {
-
-                & .group_icon {
-                    width: 25px;
-                    height: 25px;
-                    position: relative;
-                    top: 4px;
-                    margin: 0 10px 0 0;
-                }
-            }
-        }
-    }
-}
 
 
 
+
+
+
+@import "parse_photo";
 @import "pagination";
