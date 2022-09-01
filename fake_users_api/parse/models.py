@@ -1,6 +1,5 @@
 from django.db import models
-from . import utils
-from . utils import Vk_api
+from .utils import Vk_api
 
 class VkGroup(models.Model):
     group_id = models.CharField(max_length=255, unique=True)
@@ -15,16 +14,14 @@ class VkGroup(models.Model):
         db_table = 'vk_group'
 
 
-class VkUserRawData(models.Model):
-    group = models.ForeignKey(VkGroup, on_delete=models.CASCADE)
-    user_id = models.IntegerField()
-    photo_url = models.URLField()
-    first_name = models.CharField(max_length=255)
-    last_name = models.CharField(max_length=255)
+# class VkUserRawData(models.Model):
+#     group = models.ForeignKey(VkGroup, on_delete=models.CASCADE)
+#     user_id = models.IntegerField()
+#     photo = models.URLField()
+#     first_name = models.CharField(max_length=255)
+#     last_name = models.CharField(max_length=255)
+#     saved = models.BooleanField(default=False)
+#     checked = models.BooleanField(default=False)
 
-    saved = models.BooleanField(default=False)
-    checked = models.BooleanField(default=False)
-
-
-    class Meta:
-        db_table = "vk_user_rawdata"
+#     class Meta:
+#         db_table = "vk_user_rawdata"
