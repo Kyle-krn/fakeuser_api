@@ -12,16 +12,3 @@ class VkGroup(models.Model):
 
     class Meta:
         db_table = 'vk_group'
-
-
-# class VkUserRawData(models.Model):
-#     group = models.ForeignKey(VkGroup, on_delete=models.CASCADE)
-#     user_id = models.IntegerField()
-#     photo = models.URLField()
-#     first_name = models.CharField(max_length=255)
-#     last_name = models.CharField(max_length=255)
-#     saved = models.BooleanField(default=False)
-#     checked = models.BooleanField(default=False)
-
-#     class Meta:
-#         db_table = "vk_user_rawdata"

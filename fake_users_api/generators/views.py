@@ -1,10 +1,10 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.views import generic
-from . import serialzers
+from . import serializers
 from . import utils
 from rest_framework import status
-
+from api import models as api_models
 
 class TemplateView(generic.TemplateView):
     template_name = "password.html"
@@ -14,18 +14,29 @@ class TemplateView(generic.TemplateView):
 
 
 @api_view(['POST'])
-def hello_world(request):
-    serializer = serialzers.PasswordInputSerializer(data=request.data)
-    print(request.data)
+def generate_password_ajax(request):
+    serializer = serializers.PasswordInputSerializer(data=request.data)
     if serializer.is_valid():
         data = serializer.data
         password = utils.generate_password(length=data["password_length"],
                                 easy_to_read=data["easy_to_read"],
                                 characters=data["characters"])
         resp = Response({"password": password}, status=status.HTTP_200_OK)
-        
-        
     else:
         resp = Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     resp['Access-Control-Allow-Origin'] = '*'
     return resp
+
+
+
+@api_view(['POST'])
+def generate_name_ajax(request):
+    serializer = serializers.NameInputSerializer(data=request.data)
+    if serializer.is_valid():
+        names = utils.generate_name(count=serializer.data['count'], format=serializer.data['format'], sex=serializer.data['sex'])
+        resp = Response({"count": serializer.data['count'], "names": names}, status=status.HTTP_200_OK)
+    else:
+        resp = Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    resp['Access-Control-Allow-Origin'] = '*'
+    return resp
+

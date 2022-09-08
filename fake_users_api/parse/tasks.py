@@ -48,7 +48,7 @@ def parse_user_info(group_id: str):
                                                 photo_200="/".join(img_200_path.split('/')[1:]),
                                                 photo="/".join(img_path.split('/')[1:]),
                                                 age=analyze['age'],
-                                                gender=analyze['gender'].lower())
+                                                gender='male' if analyze['gender'].lower() == 'man' else 'female')
         offset += len(group_members_info)
         group_members_info = utils.Vk_api.get_group_members(group_id=group_id, fields="photo_400_orig", offset=offset)
 

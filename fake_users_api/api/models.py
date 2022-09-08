@@ -1,8 +1,8 @@
 from django.db import models
 
 GENDER = (
-    ("man", "man"),
-    ("woman", "woman"),
+    ("male", "male"),
+    ("female", "female"),
 )
 
 LANG_NAME = (
@@ -27,6 +27,16 @@ class UserName(models.Model):
     patronymic = models.CharField(max_length=255, unique=True, null=True)
     gender = models.CharField(max_length=255, choices=GENDER)
     localization = models.CharField(max_length=40, choices=LANG_NAME)
+
+    def __str__(self) -> str:
+        name = ""
+        if self.first_name:
+            name += self.first_name
+        if self.last_name:
+            name += f" {self.last_name}"
+        if self.patronymic:
+            name += f" {self.patronymic}"
+        return name
 
     class Meta:
         db_table = 'user_name'
