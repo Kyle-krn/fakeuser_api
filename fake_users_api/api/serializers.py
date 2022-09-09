@@ -1,11 +1,5 @@
 from rest_framework import serializers
 
-class UserNameSerializer(serializers.Serializer):
-    title = serializers.CharField()
-    first_name = serializers.CharField()
-    last_name = serializers.CharField()
-    patronymic = serializers.CharField(required=False)
-
 class LocationCoordinatesSerializer(serializers.Serializer):
     lat = serializers.FloatField()
     long = serializers.FloatField()
@@ -44,6 +38,16 @@ class UserJobSerializer(serializers.Serializer):
     job = serializers.CharField()
     company = serializers.CharField()
 
+class UserNameSerializer(serializers.Serializer):
+    title = serializers.CharField()
+    first_name = serializers.CharField()
+    last_name = serializers.CharField()
+    patronymic = serializers.CharField(required=False)
+
+class UserRegisteredSerializer(serializers.Serializer):
+    date = serializers.DateTimeField()
+    days = serializers.IntegerField()
+
 class RandomUserOutPutSerializer(serializers.Serializer):
     gender = serializers.CharField(required=False)
     name = UserNameSerializer(required=False)
@@ -53,6 +57,7 @@ class RandomUserOutPutSerializer(serializers.Serializer):
     login = UserLoginSerializer(required=False)
     job = UserJobSerializer(required=False)
     dob = UserDobSerializer(required=False)
+    registered = UserRegisteredSerializer(required=False)
     phone = serializers.CharField(required=False)
     photo = UserPhotoSerializer(required=False)
     nat = serializers.CharField(required=False)

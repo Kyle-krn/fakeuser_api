@@ -5,8 +5,10 @@ import random
 from faker import Faker
 import pytz
 import uuid
-from datetime import datetime
+from datetime import datetime, date, timedelta
 import hashlib
+from api import models
+from django.conf import settings
 
 fake_ru = Faker('ru_RU')
 fake_en = Faker('en_US')
@@ -33,7 +35,6 @@ PHONE_CODE = {
     }
 }
 
-
 def generate_password(length: int, easy_to_read: bool = False, characters: List[str] = []) -> str:
     strings = ''
 
@@ -41,7 +42,6 @@ def generate_password(length: int, easy_to_read: bool = False, characters: List[
     punctuation = punctuation.replace("'", "")
     punctuation = punctuation.replace('"', "")
     punctuation = punctuation.replace("\\", "")
-
 
     if "uppercase" in characters:
         strings += string.ascii_uppercase
@@ -89,7 +89,7 @@ def generate_name(count: int, format: int, sex: Literal['male', 'female']) -> Li
             else:
                 name['title'] = 'Mr.'
         else:
-            if lang == 'female':
+            if lang == 'ru':
                 name['title'] = 'Г-жа'
             else:
                 name['title'] = 'Mrs.'
@@ -103,8 +103,9 @@ def generate_name(count: int, format: int, sex: Literal['male', 'female']) -> Li
         names.append(name)
     return names
 
-def generate_timezone() -> dict:
-    tz_name = random.choice(pytz.all_timezones)
+def generate_timezone(tz_name: str = None) -> dict:
+    if not tz_name:
+        tz_name = random.choice(pytz.all_timezones)
     tz = datetime.now(pytz.timezone(tz_name))
     offset=tz.strftime('%z')
     offset = offset[:3] +':'+ offset[3:]
@@ -124,11 +125,12 @@ def random_address(localization: Literal['ru', 'eng']) -> dict:
         }
     }
     coord = fake_ru.local_latlng(country_code='RU' if localization == 'ru' else "US")
+    tz_name = coord[4]
     random_address['coordinates']['lat'] = coord[0]
     random_address['coordinates']['long'] = coord[1]
-    return random_address
+    return tz_name, random_address
 
-def random_login(localization: Literal['ru', 'eng']):
+def random_login(localization: Literal['ru', 'eng']) -> dict:
     password = generate_password(length=8)
     return {
         'uuid': uuid.uuid4(),
@@ -139,11 +141,97 @@ def random_login(localization: Literal['ru', 'eng']):
         'sha256': hashlib.sha256(password.encode()).hexdigest()
     }
 
-def random_job(localization: Literal['ru', 'eng']):
+def random_job(localization: Literal['ru', 'eng']) -> dict:
     return {
         'job': fake_ru.job() if localization == 'ru' else fake_en.job(),
         'company': fake_ru.company() if localization == 'ru' else fake_en.company()
     }
 
-def random_phone_number(localization: Literal['ru', 'eng']):
+def random_phone_number(localization: Literal['ru', 'eng']) -> str:
     return PHONE_CODE['country_code'][localization] + random.choice(PHONE_CODE['operator_code'][localization]) + ''.join([random.choice(string.digits) for i in range(7)])
+
+def random_datetime(min_year=datetime.now().year - 5, max_year=datetime.now().year):
+    start = datetime(min_year, 1, 1, 00, 00, 00)
+    years = max_year - min_year + 1
+    end = start + timedelta(days=365 * years)
+    random_date = start + (end - start) * random.random()
+    return {'date': random_date,
+            'days': (datetime.now() - random_date).days}
+
+def random_email(localization: Literal['ru', 'eng']) -> str:
+    return fake_en.email() if localization == 'ru' else fake_ru.email()
+
+def random_dob(age: int = None) -> dict:
+    if not age:
+        age = random.randint(18, 60)
+    return {
+        'date': date.today() - timedelta(days=365*age),
+        'age': age
+    }
+
+def random_photo(gender: Literal['male', 'female']) -> dict:
+    photo_model = random.choice(models.UserPhoto.objects.filter(gender=gender))
+    photo = {
+        'small': settings.HOST + photo_model.photo_100.url,
+        'medium': settings.HOST + photo_model.photo_200.url,
+        'original': settings.HOST + photo_model.photo.url
+    }
+    return photo_model.age, photo
+
+class RandomUser:
+
+    def __init__(self, 
+                 gender: Literal['male', 'female'] = None, 
+                 localization: Literal['ru', 'eng'] = None) -> None:
+        self.gender = gender if gender in ('male', 'female') else random.choice(('male', 'female'))
+        self.localization = localization if localization in ('ru', 'eng') else random.choice(('ru', 'eng'))
+        self.nat = 'Russian' if localization == 'ru' else 'American'
+        self.name = generate_name(count=1, 
+                                   format=0 if self.localization == 'ru' else 6,
+                                   sex=self.gender)[0]
+        self.__init_address()
+        self.email = random_email(self.localization)
+        self.login = random_login(self.localization)
+        self.job = random_job(self.localization)
+        self.age = None
+        self.__init_photo()
+        self.__init_dob()
+        self.registered = random_datetime()
+        self.phone = random_phone_number(localization=self.localization)
+
+        self.__accept_fields = ['gender', 'name', 'timezone', 'location', 
+                                'email', 'login', 'job', 'dob', 
+                                'registered','phone','photo','nat']
+        
+    def __init_address(self) -> None:
+        tz_name, self.location = random_address(self.localization)
+        self.timezone = generate_timezone(tz_name)
+
+    def __init_photo(self) -> None:
+        photo_model = random.choice(models.UserPhoto.objects.filter(gender=self.gender))
+        self.age = photo_model.age
+        self.photo = {
+            'small': settings.HOST + photo_model.photo_100.url,
+            'medium': settings.HOST + photo_model.photo_200.url,
+            'original': settings.HOST + photo_model.photo.url
+        }
+
+    def __init_dob(self) -> None:
+        if not self.age:
+           self.age = random.randint(18, 60)
+        self.dob = {
+            'date': date.today() - timedelta(days=365*self.age),
+            'age': self.age
+        }
+
+    def return_dict(self, 
+                    include: List[str] = [], 
+                    exclude: List[str] = []) -> dict:
+        fields = [i for i in include if i in self.__accept_fields]
+        if len(fields) == 0:
+            fields = self.__accept_fields
+        print(fields)
+        fields = [i for i in fields if i not in exclude]
+        print(fields)
+        return {i: getattr(self, i) for i in fields}
+        
