@@ -61,6 +61,7 @@ class RandomUserSerializer(serializers.Serializer):
     phone = serializers.CharField(required=False)
     photo = UserPhotoSerializer(required=False)
     nat = serializers.CharField(required=False)
+    seed = serializers.CharField(required=False)
 
 class UserResponseSerializer(serializers.Serializer):
     count = serializers.IntegerField()

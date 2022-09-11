@@ -1,5 +1,6 @@
 import string
 import random
+from this import d
 from typing import List, Literal
 import random
 from faker import Faker
@@ -35,7 +36,7 @@ PHONE_CODE = {
     }
 }
 
-def generate_password(length: int, easy_to_read: bool = False, characters: List[str] = []) -> str:
+def generate_password(length: int, easy_to_read: bool = False, characters: List[str] = [], seed: str = None) -> str:
     strings = ''
 
     punctuation = string.punctuation
@@ -60,16 +61,19 @@ def generate_password(length: int, easy_to_read: bool = False, characters: List[
         strings = strings.replace("o", "")
         strings = strings.replace("O", "")
         strings = strings.replace("0", "")
-    
-    return ''.join(random.choice(strings) for _ in range(length))
+    if seed:
+        random.seed(seed)
+    password = ''.join(random.choice(strings) for _ in range(length))
+    random.seed()
+    return password
 
-def generate_name(count: int, format: int, sex: Literal['male', 'female']) -> List[str]:
+def generate_name(count: int, format: int, sex: Literal['male', 'female'], user_faker: Faker = None) -> List[str]:
     names = []
     if format <= 5:
         lang = 'ru'
     else:
         lang = 'eng'
-    
+    faker: Faker = (fake_ru if lang == 'ru' else fake_en) if not user_faker else user_faker
     if sex == 'any':
         gender = None
     else:
@@ -79,9 +83,9 @@ def generate_name(count: int, format: int, sex: Literal['male', 'female']) -> Li
         if sex == 'any':
             gender = random.choice(['male', 'female'])
         name = {
-            'first_name': getattr(fake_ru if lang == 'ru' else fake_en, f'first_name_{gender}')(),
-            'last_name': getattr(fake_ru if lang == 'ru' else fake_en, f'last_name_{gender}')(),
-            'patronymic': getattr(fake_ru, f'middle_name_{gender}')() if lang == 'ru' else None
+            'first_name': getattr(faker if lang == 'ru' else fake_en, f'first_name_{gender}')(),
+            'last_name': getattr(faker if lang == 'ru' else fake_en, f'last_name_{gender}')(),
+            'patronymic': getattr(faker, f'middle_name_{gender}')() if lang == 'ru' else None
         }
         if gender == 'male':
             if lang == 'ru':
@@ -111,55 +115,36 @@ def generate_timezone(tz_name: str = None) -> dict:
     offset = offset[:3] +':'+ offset[3:]
     return {'offset': offset, 'description': tz_name}
 
-def random_address(localization: Literal['ru', 'eng']) -> dict:
+def random_address(localization: Literal['ru', 'eng'],
+                   user_faker: Faker = None) -> dict:
+    faker: Faker = (fake_ru if localization == 'ru' else fake_en) if not user_faker else user_faker
     random_address = {
-        'street': fake_ru.street_name() if localization == 'ru' else fake_en.street_name(),
-        'house': fake_ru.building_number() if localization == 'ru' else fake_en.building_number(),
-        'city': fake_ru.city() if localization == 'ru' else fake_en.city(),
-        'state': fake_ru.region() if localization == 'ru' else fake_en.state(),
+        'street': faker.street_name(),
+        'house': faker.building_number(),
+        'city': faker.city(),
+        'state': getattr(faker, 'region' if localization == 'ru' else 'state')(),
         'country': 'Russia' if localization == 'ru' else 'USA',
-        'postcode': fake_ru.postcode() if localization == 'ru' else fake_en.postcode(),
+        'postcode': faker.postcode(),
         'coordinates': {
             'lat': None,
             'long': None
         }
     }
-    coord = fake_ru.local_latlng(country_code='RU' if localization == 'ru' else "US")
+    coord = faker.local_latlng(country_code='RU' if localization == 'ru' else "US")
     tz_name = coord[4]
     random_address['coordinates']['lat'] = coord[0]
     random_address['coordinates']['long'] = coord[1]
-    return tz_name, random_address
+    return tz_name, random_address    
 
-def random_login(localization: Literal['ru', 'eng']) -> dict:
-    password = generate_password(length=8)
-    return {
-        'uuid': uuid.uuid4(),
-        'username': fake_ru.user_name() if localization == 'ru' else fake_en.user_name(),
-        'password': password,
-        'md5': hashlib.md5(password.encode()).hexdigest(),
-        'sha1': hashlib.sha1(password.encode()).hexdigest(),
-        'sha256': hashlib.sha256(password.encode()).hexdigest()
-    }
-
-def random_job(localization: Literal['ru', 'eng']) -> dict:
-    return {
-        'job': fake_ru.job() if localization == 'ru' else fake_en.job(),
-        'company': fake_ru.company() if localization == 'ru' else fake_en.company()
-    }
-
-def random_phone_number(localization: Literal['ru', 'eng']) -> str:
-    return PHONE_CODE['country_code'][localization] + random.choice(PHONE_CODE['operator_code'][localization]) + ''.join([random.choice(string.digits) for i in range(7)])
-
-def random_datetime(min_year=datetime.now().year - 5, max_year=datetime.now().year):
+def random_datetime(min_year=datetime.now().year - 5, max_year=datetime.now().year, seed: str =None):
     start = datetime(min_year, 1, 1, 00, 00, 00)
     years = max_year - min_year + 1
     end = start + timedelta(days=365 * years)
+    random.seed(seed)
     random_date = start + (end - start) * random.random()
+    random.seed()
     return {'date': random_date,
             'days': (datetime.now() - random_date).days}
-
-def random_email(localization: Literal['ru', 'eng']) -> str:
-    return fake_en.email() if localization == 'ru' else fake_ru.email()
 
 def random_dob(age: int = None) -> dict:
     if not age:
@@ -179,35 +164,47 @@ def random_photo(gender: Literal['male', 'female']) -> dict:
     return photo_model.age, photo
 
 class RandomUser:
-    def __init__(self, 
+    def __init__(self,
+                 seed: str = None,
                  gender: Literal['male', 'female'] = None, 
-                 localization: Literal['ru', 'eng'] = None) -> None:
+                 localization: Literal['ru', 'eng'] = None,
+                 ) -> None:
+        self.seed = seed if seed else generate_password(length=10)
+        random.seed(seed)
         self.gender = gender if gender in ('male', 'female') else random.choice(('male', 'female'))
         self.localization = localization if localization in ('ru', 'eng') else random.choice(('ru', 'eng'))
+        random.seed()
+        print(self.seed)
+        self.faker = Faker("ru_RU" if self.localization == 'ru' else "en_US")
+
+        self.faker.seed_instance(self.seed)
+
         self.nat = 'Russian' if localization == 'ru' else 'American'
-        self.name = generate_name(count=1, 
-                                   format=0 if self.localization == 'ru' else 6,
-                                   sex=self.gender)[0]
+        self.name = generate_name(count=1,
+                                  format=0 if self.localization == 'ru' else 6,
+                                  sex=self.gender,
+                                  user_faker=self.faker)[0]
         self.__init_address()
-        self.email = random_email(self.localization)
-        self.login = random_login(self.localization)
-        self.job = random_job(self.localization)
+        self.email = self.faker.email()
+        self.__init_login()
+        self.__init_job()
         self.age = None
         self.__init_photo()
         self.__init_dob()
-        self.registered = random_datetime()
-        self.phone = random_phone_number(localization=self.localization)
-
+        self.registered = random_datetime(seed=self.seed)
+        self.__init_phone_number()
         self.__accept_fields = ['gender', 'name', 'timezone', 'location', 
                                 'email', 'login', 'job', 'dob', 
-                                'registered','phone','photo','nat']
+                                'registered','phone','photo','nat', 'seed']
         
     def __init_address(self) -> None:
-        tz_name, self.location = random_address(self.localization)
+        tz_name, self.location = random_address(self.localization, self.faker)
         self.timezone = generate_timezone(tz_name)
 
     def __init_photo(self) -> None:
+        random.seed(self.seed)
         photo_model = random.choice(models.UserPhoto.objects.filter(gender=self.gender))
+        random.seed()
         self.age = photo_model.age
         self.photo = {
             'small': settings.HOST + photo_model.photo_100.url,
@@ -215,13 +212,37 @@ class RandomUser:
             'original': settings.HOST + photo_model.photo.url
         }
 
+    def __init_job(self) -> None:
+        self.job = {
+            'job': self.faker.job(),
+            'company': self.faker.company()
+        }
+
     def __init_dob(self) -> None:
         if not self.age:
-           self.age = random.randint(18, 60)
+            random.seed(self.seed)
+            self.age = random.randint(18, 60)
+            random.seed()
         self.dob = {
             'date': date.today() - timedelta(days=365*self.age),
             'age': self.age
         }
+
+    def __init_login(self) -> None:
+        password = generate_password(length=8, seed=self.seed)
+        self.login = {
+            'uuid': self.faker.uuid4(),
+            'username': self.faker.user_name(),
+            'password': password,
+            'md5': hashlib.md5(password.encode()).hexdigest(),
+            'sha1': hashlib.sha1(password.encode()).hexdigest(),
+            'sha256': hashlib.sha256(password.encode()).hexdigest()
+        }
+
+    def __init_phone_number(self):
+        random.seed(self.seed)
+        self.phone = PHONE_CODE['country_code'][self.localization] + random.choice(PHONE_CODE['operator_code'][self.localization]) + ''.join([random.choice(string.digits) for i in range(7)])
+        random.seed()
 
     def return_dict(self, 
                     include: List[str] = [], 
