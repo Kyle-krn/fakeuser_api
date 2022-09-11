@@ -7,10 +7,12 @@ from django.http import HttpRequest
 from . import serializers
 from rest_framework import status
 from rest_framework.renderers import JSONRenderer
+from rest_framework_xml.renderers import XMLRenderer
+from rest_framework_yaml.renderers import YAMLRenderer
 
 
 @api_view(['GET'])
-@renderer_classes((JSONRenderer, UserCsvRender))
+@renderer_classes((JSONRenderer, XMLRenderer, YAMLRenderer, UserCsvRender))
 def random_user_view(request: HttpRequest):
     gender = request.query_params.get('gender')
     local = request.query_params.get('local') if request.query_params.get('local') in ('ru', 'eng') else choice(('ru', 'eng'))
