@@ -40,7 +40,7 @@ class NameInputSerializer(serializers.Serializer):
         raise serializers.ValidationError("Неверный формат")
 
     def validate_sex(self, value):
-        if value in ['any', 'man', 'woman']:
+        if value in ['any', 'male', 'female']:
             return value
         raise serializers.ValidationError("Неверный пол")
 

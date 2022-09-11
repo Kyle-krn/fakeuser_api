@@ -27,7 +27,7 @@ class UserPhotoSerializer(serializers.Serializer):
 
 class UserLocationSerializer(serializers.Serializer):
     street = serializers.CharField()
-    house = serializers.IntegerField()
+    house = serializers.CharField()
     city = serializers.CharField()
     state = serializers.CharField()
     country = serializers.CharField()
@@ -42,13 +42,13 @@ class UserNameSerializer(serializers.Serializer):
     title = serializers.CharField()
     first_name = serializers.CharField()
     last_name = serializers.CharField()
-    patronymic = serializers.CharField(required=False)
+    patronymic = serializers.CharField(allow_blank=True, allow_null=True)
 
 class UserRegisteredSerializer(serializers.Serializer):
     date = serializers.DateTimeField()
     days = serializers.IntegerField()
 
-class RandomUserOutPutSerializer(serializers.Serializer):
+class RandomUserSerializer(serializers.Serializer):
     gender = serializers.CharField(required=False)
     name = UserNameSerializer(required=False)
     timezone = UserTimeZoneSerializer(required=False)
@@ -61,3 +61,7 @@ class RandomUserOutPutSerializer(serializers.Serializer):
     phone = serializers.CharField(required=False)
     photo = UserPhotoSerializer(required=False)
     nat = serializers.CharField(required=False)
+
+class UserResponseSerializer(serializers.Serializer):
+    count = serializers.IntegerField()
+    results = RandomUserSerializer(many=True)

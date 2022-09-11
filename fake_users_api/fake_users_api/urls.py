@@ -18,6 +18,8 @@ from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
 from rest_framework_swagger.views import get_swagger_view
+from rest_framework.urlpatterns import format_suffix_patterns
+
 # from django.conf.urls import url
 
 schema_view = get_swagger_view(title='Pastebin API')
@@ -29,3 +31,7 @@ urlpatterns = [
     path('api/', include('api.urls', namespace='api')),
     path('swagger/', schema_view)
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+# urlpatterns = format_suffix_patterns(urlpatterns,
+#                                  allowed=['json', 'csv'])

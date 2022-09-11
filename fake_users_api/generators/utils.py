@@ -179,7 +179,6 @@ def random_photo(gender: Literal['male', 'female']) -> dict:
     return photo_model.age, photo
 
 class RandomUser:
-
     def __init__(self, 
                  gender: Literal['male', 'female'] = None, 
                  localization: Literal['ru', 'eng'] = None) -> None:
@@ -230,8 +229,6 @@ class RandomUser:
         fields = [i for i in include if i in self.__accept_fields]
         if len(fields) == 0:
             fields = self.__accept_fields
-        print(fields)
         fields = [i for i in fields if i not in exclude]
-        print(fields)
         return {i: getattr(self, i) for i in fields}
         

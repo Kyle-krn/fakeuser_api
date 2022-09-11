@@ -29,6 +29,7 @@ def generate_password_ajax(request):
 
 
 
+
 @api_view(['POST'])
 def generate_name_ajax(request):
     serializer = serializers.NameInputSerializer(data=request.data)
