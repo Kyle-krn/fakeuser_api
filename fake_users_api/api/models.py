@@ -1,14 +1,17 @@
 from django.db import models
 
+
 GENDER = (
     ("male", "male"),
     ("female", "female"),
 )
 
+
 LANG_NAME = (
     ("ru", "ru"),
     ("eng","eng")
 )
+
 
 class UserPhoto(models.Model):
     photo_100 = models.ImageField(upload_to='images/photo_100/')

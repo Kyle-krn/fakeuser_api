@@ -1,26 +1,22 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.views import generic
+from rest_framework import status
 from . import serializers
 from . import utils
-from rest_framework import status
-from api import models as api_models
+
 
 class TemplateView(generic.TemplateView):
     template_name = "password.html"
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        return context
 
 
 @api_view(['POST'])
 def generate_password_ajax(request):
     serializer = serializers.PasswordInputSerializer(data=request.data)
     if serializer.is_valid():
-        data = serializer.data
-        password = utils.generate_password(length=data["password_length"],
-                                easy_to_read=data["easy_to_read"],
-                                characters=data["characters"])
+        password = utils.generate_password(length=serializer.data["password_length"],
+                                           easy_to_read=serializer.data["easy_to_read"],
+                                           characters=serializer.data["characters"])
         resp = Response({"password": password}, status=status.HTTP_200_OK)
     else:
         resp = Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
