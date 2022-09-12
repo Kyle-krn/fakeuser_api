@@ -24,7 +24,7 @@ class ListUsers(APIView):
 
     def get_query_params(self):
         gender = self.request.query_params.get('gender')
-        local = self.request.query_params.get('local')
+        local = [i.strip() for i in self.request.query_params.get('local').split(',')] if self.request.query_params.get('local') else ['us']
         include = [i.strip() for i in self.request.query_params.get('include').split(',')] if self.request.query_params.get('include') else []
         exclude = [i.strip() for i in self.request.query_params.get('exclude').split(',')] if self.request.query_params.get('exclude') else []
         count = int(self.request.query_params.get('count')) if self.request.query_params.get('count') and self.request.query_params.get('count').isdigit() else 1
@@ -36,14 +36,17 @@ class ListUsers(APIView):
     def get(self, request, format=None):
         gender, local, include, exclude, count, seed = self.get_query_params()
         
-        faker = Faker(['ru_RU', 'en_US'])
+        faker = Faker(['ru_RU', 'en_US', 'az_AZ', 'bn_BD', 'cs_CZ', 'da_DK', 'de_DE', 'el_GR', 'es_CL'])
         faker.seed_instance(seed)
         random.seed(seed)
         data = {
             'count': count,
-            'results': [generator_utils.RandomUser(gender=gender, localization=local, user_faker=faker).return_dict(include=include, exclude=exclude) for i in range(count)],
+            'results': [generator_utils.RandomUser(gender=gender, localization=random.choice(local), user_faker=faker).return_dict(include=include, exclude=exclude) for i in range(count)],
             'seed': seed
         }
         serializer = self.serializer_class(data=data)
         serializer.is_valid()
         return Response(serializer.data, status=status.HTTP_200_OK, headers={'Access-Control-Allow-Origin': '*'})
+
+
+# not snn: da_DK, 

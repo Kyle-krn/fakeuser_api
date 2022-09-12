@@ -8,13 +8,24 @@ import pytz
 import string
 import random
 
+
 common_faker = Faker(['ru_RU', 'en_US'])
-# fake_en = Faker()
+
+NATIONALITY = ['ru', 'us', 'aze', 'bgd', 'cze', 'dnk', 'deu', 'grc', 'chl']
+
+LOCAL_LITERAL = Literal['ru', 'us', 'aze', 'bgd', 'cze', 'dnk', 'deu', 'grc', 'chl']
 
 PHONE_CODE = {
     'country_code': {
         'ru': '+7',
-        'eng': '+1'
+        'us': '+1',
+        'aze': '+994',
+        'bgd': '+880',
+        'cze': '+420',
+        'dnk': '+45',
+        'deu': '+49',
+        'grc': '+30',
+        'chl': '+56'
     },
     'operator_code': {
         'ru': ['911', '912', '917', '919', '981', '982', 
@@ -22,16 +33,24 @@ PHONE_CODE = {
                '927', '929', '931', '932', '937', '939', 
                '999', '900', '901', '902', '904', '908', 
                '950', '951', '952', '953', '991', '992'],
-        'eng': ['205', '251', '256', '334', '480', '520', 
+        'us': ['205', '251', '256', '334', '480', '520', 
                '602', '623', '928', '209', '213', '310', 
                '323', '408', '415', '424', '510', '530', 
                '559', '562', '619', '626', '650', '661', 
                '707', '714', '760', '805', '239', '305', 
                '321', '352', '386', '407', '561', '727', 
                '754', '772', '786', '813', '850', '863', 
-               '904', '941']
+               '904', '941'],
+        'aze': ['12', '123', '124', '125', '20', '88', '192', '193', '113'],
+        'bgd': ['10', '11', '12', '13', '14', '15', '16', '17', '18', '19'],
+        'cze': ['601', '602', '606', '607', '603', '604', '605', '608', '70', '72', '73', '77', '79', '91'],
+        'dnk': ['4281', '4282', '4283', '4284', '4285', '4286', '4287', '4288', '4289', '4290'],
+        'deu': ['0151', '0160', '0170', '0171', '0175', '0152', '0162', '0172', '0173', '0174'],
+        'grc': ['697', '698', '697', '694', '695', '690', '693', '699'],
+        'chl': ['9939', '9929', '9931', '9935', '9941', '9947']
     }
 }
+
 
 def generate_password(length: int, easy_to_read: bool = False, characters: List[str] = []) -> str:
     strings = ''
@@ -61,13 +80,16 @@ def generate_password(length: int, easy_to_read: bool = False, characters: List[
     password = ''.join(random.choice(strings) for _ in range(length))
     return password
 
-def generate_name(count: int, format: int, sex: Literal['male', 'female'], user_faker: Faker = None) -> List[str]:
+
+def generate_name(count: int, 
+                  format: int = None, 
+                  sex: Literal['male', 'female'] = 'any') -> List[str]:
     names = []
     if format <= 5:
         lang = 'ru'
     else:
-        lang = 'eng'
-    faker: Faker = (common_faker['ru_RU' if lang == 'ru' else 'en_US']) if not user_faker else user_faker
+        lang = 'us'
+    faker: Faker = common_faker['ru_RU' if lang == 'ru' else 'en_US']
     if sex == 'any':
         gender = None
     else:
@@ -77,20 +99,11 @@ def generate_name(count: int, format: int, sex: Literal['male', 'female'], user_
         if sex == 'any':
             gender = random.choice(['male', 'female'])
         name = {
+            'title': get_title(gender=gender, localization=lang),
             'first_name': getattr(faker, f'first_name_{gender}')(),
             'last_name': getattr(faker, f'last_name_{gender}')(),
             'patronymic': getattr(faker, f'middle_name_{gender}')() if lang == 'ru' else None
         }
-        if gender == 'male':
-            if lang == 'ru':
-                name['title'] = 'Г-н'
-            else:
-                name['title'] = 'Mr.'
-        else:
-            if lang == 'ru':
-                name['title'] = 'Г-жа'
-            else:
-                name['title'] = 'Mrs.'
 
         if format == 3:
             name['first_name'] = name['first_name'][0] + "."
@@ -101,6 +114,21 @@ def generate_name(count: int, format: int, sex: Literal['male', 'female'], user_
         names.append(name)
     return names
 
+
+def get_title(gender: Literal['male', 'female'], localization: LOCAL_LITERAL):
+    if localization == 'ru':
+        if gender == 'male':
+            return 'Г-н'
+        else:
+            return 'Г-жа'    
+    elif localization == 'us':
+        if gender == 'male':
+            return 'Mr.'
+        else:
+            return 'Mrs.'
+    return None
+
+
 def generate_timezone(tz_name: str = None) -> dict:
     if not tz_name:
         tz_name = random.choice(pytz.all_timezones)
@@ -109,26 +137,42 @@ def generate_timezone(tz_name: str = None) -> dict:
     offset = offset[:3] +':'+ offset[3:]
     return {'offset': offset, 'description': tz_name}
 
-def random_address(localization: Literal['ru', 'eng'],
+
+def random_address(localization: LOCAL_LITERAL,
                    user_faker: Faker = None) -> dict:
     faker: Faker = (faker["ru_RU" if localization == 'ru' else 'en_US']) if not user_faker else user_faker
+    region_name_attr = {
+        'ru': 'region',
+        'us': 'state',
+        'aze': 'administrative_unit',
+        'bgd': 'administrative_unit',
+        'cze': 'administrative_unit',
+        'dnk': 'administrative_unit',
+        'deu': 'administrative_unit',
+        'grc': 'administrative_unit',
+        'chl': 'administrative_unit',
+    }
     random_address = {
         'street': faker.street_name(),
         'house': faker.building_number(),
         'city': faker.city(),
-        'state': getattr(faker, 'region' if localization == 'ru' else 'state')(),
-        'country': 'Russia' if localization == 'ru' else 'USA',
+        'state': getattr(faker, region_name_attr[localization])(),
+        'country': faker.current_country(),
         'postcode': faker.postcode(),
         'coordinates': {
             'lat': None,
             'long': None
         }
     }
-    coord = faker.local_latlng(country_code='RU' if localization == 'ru' else "US")
-    tz_name = coord[4]
+    coord = faker.local_latlng(faker.current_country_code())
+    if localization == 'grc':
+        tz_name = 'Europe/Athens'
+    else:
+        tz_name = coord[4]
     random_address['coordinates']['lat'] = coord[0]
     random_address['coordinates']['long'] = coord[1]
     return tz_name, random_address    
+
 
 def random_datetime(min_year=datetime.now().year - 5, max_year=datetime.now().year):
     start = datetime(min_year, 1, 1, 00, 00, 00)
@@ -138,22 +182,41 @@ def random_datetime(min_year=datetime.now().year - 5, max_year=datetime.now().ye
     return {'date': random_date,
             'days': (datetime.now() - random_date).days}
 
+
+def func_locale(country_name: str):
+    if country_name == 'ru':
+        return 'ru_RU', 'Russian'
+    elif country_name == 'us':
+        return 'en_US', 'American'
+    elif country_name == 'aze':
+        return 'az_AZ', 'Azerbaijani'
+    elif country_name == 'bgd':
+        return 'bn_BD', 'Bangladeshi',
+    elif country_name == 'cze':
+        return 'cs_CZ', 'Czech'
+    elif country_name == 'dnk':
+        return 'da_DK', 'Danish'
+    elif country_name == 'deu':
+        return 'de_DE', 'German'
+    elif country_name == 'grc':
+        return 'el_GR', 'Greek'
+    elif country_name == 'chl':
+        return 'es_CL', 'Chilean'
+
+
 class RandomUser:
     def __init__(self,
                  user_faker: Faker,
                  gender: Literal['male', 'female'] = None, 
-                 localization: Literal['ru', 'eng'] = None,
+                 localization: List = None,
                  ) -> None:
         self.gender = gender if gender in ('male', 'female') else random.choice(('male', 'female'))
-        self.localization = localization if localization in ('ru', 'eng') else random.choice(('ru', 'eng'))
-        # self.faker = Faker("ru_RU" if self.localization == 'ru' else "en_US")
-        self.faker = user_faker['ru_RU' if self.localization == 'ru' else 'en_US']
+        self.localization = localization if localization in NATIONALITY else 'us'
+        locale, nat = func_locale(self.localization)
+        self.faker = user_faker[locale]
 
-        self.nat = 'Russian' if localization == 'ru' else 'American'
-        self.name = generate_name(count=1,
-                                  format=0 if self.localization == 'ru' else 6,
-                                  sex=self.gender,
-                                  user_faker=self.faker)[0]
+        self.nat = nat
+        self.__init_name()
         self.__init_address()
         self.email = self.faker.email()
         self.__init_login()
@@ -163,12 +226,23 @@ class RandomUser:
         self.__init_dob()
         self.registered = random_datetime()
         self.__init_phone_number()
+        self.__init_ssn()
         self.__accept_fields = ['gender', 'name', 'timezone', 'location', 
                                 'email', 'login', 'job', 'dob', 
-                                'registered','phone','photo','nat']
+                                'registered','phone','photo','nat', 'ssn']
+    
+    def __init_name(self):
+        self.name = {
+            'title': get_title(gender=self.gender, localization=self.localization),
+            'first_name': getattr(self.faker, f'first_name_{self.gender}')(),
+            'last_name': getattr(self.faker, f'last_name_{self.gender}')(),
+            'patronymic': getattr(self.faker, f'middle_name_{self.gender}')() if self.localization == 'ru' else None
+        }
         
     def __init_address(self) -> None:
         tz_name, self.location = random_address(self.localization, self.faker)
+        if self.localization == 'bgd':
+            tz_name = 'Asia/Dhaka'
         self.timezone = generate_timezone(tz_name)
 
     def __init_photo(self) -> None:
@@ -207,6 +281,9 @@ class RandomUser:
 
     def __init_phone_number(self):
         self.phone = PHONE_CODE['country_code'][self.localization] + random.choice(PHONE_CODE['operator_code'][self.localization]) + ''.join([random.choice(string.digits) for i in range(7)])
+
+    def __init_ssn(self):
+        self.ssn = self.faker.ssn() if self.localization != 'dnk' else None
 
     def return_dict(self, 
                     include: List[str] = [], 

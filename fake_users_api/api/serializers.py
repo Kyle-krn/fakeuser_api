@@ -1,5 +1,5 @@
 from rest_framework import serializers
-
+from generators.utils import NATIONALITY
 
 class LocationCoordinatesSerializer(serializers.Serializer):
     lat = serializers.FloatField()
@@ -71,6 +71,7 @@ class RandomUserSerializer(serializers.Serializer):
     phone = serializers.CharField(required=False)
     photo = UserPhotoSerializer(required=False)
     nat = serializers.CharField(required=False)
+    ssn = serializers.CharField(required=False)
 
 
 class UserResponseSerializer(serializers.Serializer):
@@ -81,12 +82,12 @@ class UserResponseSerializer(serializers.Serializer):
 
 class UserRequestSerialzer(serializers.Serializer):
     gender = serializers.ChoiceField(choices=['male', 'female'], required=False, help_text='Select gender')
-    local = serializers.ChoiceField(choices=['ru', 'eng'], required=False)
+    local = serializers.MultipleChoiceField(choices=NATIONALITY, required=False)
     count = serializers.IntegerField(default=1, required=False)
     include = serializers.MultipleChoiceField(choices=['gender', 'name', 'timezone', 'location', 
                                                        'email', 'login', 'job', 'dob', 
-                                                       'registered','phone','photo','nat', 'seed'], required=False)
+                                                       'registered','phone','photo','nat', 'seed', 'ssn'], required=False)
     exclude = serializers.MultipleChoiceField(choices=['gender', 'name', 'timezone', 'location', 
                                                        'email', 'login', 'job', 'dob', 
-                                                       'registered','phone','photo','nat', 'seed'], required=False)
+                                                       'registered','phone','photo','nat', 'seed', 'ssn'], required=False)
     seed = serializers.CharField(required=False)
