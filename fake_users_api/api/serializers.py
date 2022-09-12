@@ -66,3 +66,16 @@ class RandomUserSerializer(serializers.Serializer):
 class UserResponseSerializer(serializers.Serializer):
     count = serializers.IntegerField()
     results = RandomUserSerializer(many=True)
+
+
+class UserRequestSerialzer(serializers.Serializer):
+    gender = serializers.ChoiceField(choices=['male', 'female'], required=False, help_text='Select gender')
+    local = serializers.ChoiceField(choices=['ru', 'eng'], required=False)
+    count = serializers.IntegerField(default=1, required=False)
+    include = serializers.MultipleChoiceField(choices=['gender', 'name', 'timezone', 'location', 
+                                                       'email', 'login', 'job', 'dob', 
+                                                       'registered','phone','photo','nat', 'seed'], required=False)
+    exclude = serializers.MultipleChoiceField(choices=['gender', 'name', 'timezone', 'location', 
+                                                       'email', 'login', 'job', 'dob', 
+                                                       'registered','phone','photo','nat', 'seed'], required=False)
+    seed = serializers.CharField(required=False)

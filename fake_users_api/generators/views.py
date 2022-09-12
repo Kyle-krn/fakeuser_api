@@ -22,13 +22,10 @@ def generate_password_ajax(request):
                                 easy_to_read=data["easy_to_read"],
                                 characters=data["characters"])
         resp = Response({"password": password}, status=status.HTTP_200_OK)
-        print(password)
     else:
         resp = Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     resp['Access-Control-Allow-Origin'] = '*'
     return resp
-
-
 
 
 @api_view(['POST'])

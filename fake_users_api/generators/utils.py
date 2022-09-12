@@ -1,11 +1,9 @@
 import string
 import random
-from this import d
 from typing import List, Literal
 import random
 from faker import Faker
 import pytz
-import uuid
 from datetime import datetime, date, timedelta
 import hashlib
 from api import models
@@ -146,23 +144,6 @@ def random_datetime(min_year=datetime.now().year - 5, max_year=datetime.now().ye
     return {'date': random_date,
             'days': (datetime.now() - random_date).days}
 
-def random_dob(age: int = None) -> dict:
-    if not age:
-        age = random.randint(18, 60)
-    return {
-        'date': date.today() - timedelta(days=365*age),
-        'age': age
-    }
-
-def random_photo(gender: Literal['male', 'female']) -> dict:
-    photo_model = random.choice(models.UserPhoto.objects.filter(gender=gender))
-    photo = {
-        'small': settings.HOST + photo_model.photo_100.url,
-        'medium': settings.HOST + photo_model.photo_200.url,
-        'original': settings.HOST + photo_model.photo.url
-    }
-    return photo_model.age, photo
-
 class RandomUser:
     def __init__(self,
                  seed: str = None,
@@ -174,7 +155,6 @@ class RandomUser:
         self.gender = gender if gender in ('male', 'female') else random.choice(('male', 'female'))
         self.localization = localization if localization in ('ru', 'eng') else random.choice(('ru', 'eng'))
         random.seed()
-        print(self.seed)
         self.faker = Faker("ru_RU" if self.localization == 'ru' else "en_US")
 
         self.faker.seed_instance(self.seed)

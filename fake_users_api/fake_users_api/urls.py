@@ -1,5 +1,4 @@
 """fake_users_api URL Configuration
-
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.1/topics/http/urls/
 Examples:
@@ -19,8 +18,7 @@ from django.conf.urls.static import static
 from django.conf import settings
 from rest_framework_swagger.views import get_swagger_view
 from rest_framework.urlpatterns import format_suffix_patterns
-
-# from django.conf.urls import url
+from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
 
 schema_view = get_swagger_view(title='Pastebin API')
 
@@ -29,9 +27,12 @@ urlpatterns = [
     path('generators/', include('generators.urls', namespace="generators")),
     path('parse/', include('parse.urls', namespace="parse")),
     path('api/', include('api.urls', namespace='api')),
-    path('swagger/', schema_view)
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
-# urlpatterns = format_suffix_patterns(urlpatterns,
-#                                  allowed=['json', 'csv'])
+urlpatterns += [
+    # YOUR PATTERNS
+    path('schema/', SpectacularAPIView.as_view(), name='schema'),
+    # Optional UI:
+    path('schema/swagger-ui/', SpectacularSwaggerView.as_view(), name='swagger-ui'),
+]
