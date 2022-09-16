@@ -6,5 +6,5 @@ app_name = "api"
 
 
 urlpatterns = [
-    path('', views.ListUsers.as_view(), name="random_user"),
+    path('', views.ApiView.as_view(), name="random_user"),
 ]

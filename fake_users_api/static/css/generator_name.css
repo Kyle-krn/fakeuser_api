@@ -1,0 +1,279 @@
+.content__name {
+  padding: 0 0 30px 0;
+  display: flex;
+  -moz-column-gap: 20px;
+       column-gap: 20px;
+  flex-wrap: wrap;
+}
+@media (max-width: 700px) {
+  .content__name {
+    flex-direction: column;
+  }
+}
+.content__name .name__title__block {
+  width: 100%;
+  margin: 0 auto 32px auto;
+}
+.content__name .name__title__block .name__title {
+  font-weight: 500;
+  max-width: none;
+  margin: 0 auto 16px auto;
+}
+@media (max-width: 700px) {
+  .content__name .name__title__block .name__title {
+    text-align: left;
+  }
+}
+.content__name .name__title__block .name__subtitle {
+  max-width: none;
+}
+@media (max-width: 700px) {
+  .content__name .name__title__block .name__subtitle {
+    font-size: 16px;
+    text-align: left;
+  }
+}
+.content__name form.name__form {
+  order: 1;
+  display: flex;
+  align-self: flex-start;
+  background-color: #FFFFFF;
+  box-shadow: 0px 3px 14px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  flex-direction: column;
+  width: 30%;
+  padding: 24px 16px;
+}
+@media (max-width: 700px) {
+  .content__name form.name__form {
+    align-self: center;
+    margin: 0 0 32px 0;
+    width: 100%;
+  }
+}
+.content__name form.name__form select {
+  width: 100%;
+}
+.content__name form.name__form label {
+  font-size: 16px;
+  display: block;
+  margin: 0 0 16px 0;
+}
+.content__name form.name__form .form__format {
+  margin: 0 0 16px 0;
+}
+.content__name form.name__form .form__sex {
+  margin: 0 0 16px 0;
+}
+.content__name form.name__form .form__count {
+  margin: 0 0 24px 0;
+}
+.content__name form.name__form .form__count input {
+  width: 40%;
+}
+.content__name form.name__form button {
+  width: 100%;
+  transition-duration: 0.2s;
+}
+.content__name form.name__form button:active {
+  background-color: #959595;
+}
+.content__name .name__null {
+  width: 68%;
+  order: 2;
+}
+@media (max-width: 1035px) {
+  .content__name .name__null {
+    width: 60%;
+  }
+}
+@media (max-width: 700px) {
+  .content__name .name__null {
+    width: 100%;
+  }
+}
+.content__name .name__null p:not(:last-child) {
+  margin: 0 0 20px 0;
+}
+.content__name .name__results {
+  order: 2;
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+  width: 68%;
+}
+@media (max-width: 1035px) {
+  .content__name .name__results {
+    width: 60%;
+  }
+}
+@media (max-width: 700px) {
+  .content__name .name__results {
+    width: 100%;
+  }
+}
+.content__name .name__results .results__title {
+  margin: 0 0 5px 0;
+  font-size: 25px;
+}
+@media (max-width: 700px) {
+  .content__name .name__results .results__title {
+    font-size: 18px;
+  }
+}
+.content__name .name__results .results__time {
+  font-size: 16px;
+  font-weight: 300;
+  margin: 0 0 10px 0;
+}
+@media (max-width: 700px) {
+  .content__name .name__results .results__time {
+    font-size: 10px;
+  }
+}
+.content__name .name__results .results__show_control {
+  margin: 0 0 10px 0;
+  display: flex;
+}
+.content__name .name__results .results__show_control button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid rgba(179, 179, 179, 0.753);
+  z-index: 1;
+  background-color: #FAFAFA;
+  transition-duration: 1s;
+  color: #959595;
+  font-size: 16px;
+  width: 110px;
+}
+@media (max-width: 700px) {
+  .content__name .name__results .results__show_control button {
+    width: 70px;
+    font-size: 12px;
+  }
+}
+.content__name .name__results .results__show_control button svg {
+  width: 15px;
+  height: 15px;
+}
+@media (max-width: 700px) {
+  .content__name .name__results .results__show_control button svg {
+    width: 12px;
+    height: 12px;
+  }
+}
+.content__name .name__results .results__show_control button.active {
+  color: #B88ACB;
+  border-bottom: 2px solid #B88ACB;
+}
+.content__name .name__results .results__show_control button.active svg g path {
+  fill: #B88ACB;
+}
+.content__name .name__results .results__show_control button svg {
+  position: relative;
+  right: -4px;
+  transition-duration: 1s;
+}
+.content__name .name__results .results__show_control button:hover {
+  color: #B88ACB;
+}
+.content__name .name__results .results__show_control button:hover svg g path {
+  fill: #B88ACB;
+}
+.content__name .name__results hr {
+  flex-grow: 1;
+  width: 1000px;
+  position: relative;
+  border-bottom: 2px solid rgba(179, 179, 179, 0.753);
+  bottom: 12px;
+}
+.content__name .name__results .results__block .results__bigger {
+  margin: 32px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  text-align: center;
+}
+@media (max-width: 700px) {
+  .content__name .name__results .results__block .results__bigger {
+    align-items: center;
+  }
+}
+.content__name .name__results .results__block .results__bigger .result {
+  font-size: 30px;
+  font-weight: 400;
+  width: 98%;
+  height: 58px;
+  margin: 0 auto 20px auto;
+  background: #FFFFFF;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  cursor: pointer;
+  padding: 16px;
+  top: 50%;
+  left: 50%;
+  line-height: 25px;
+}
+@media (max-width: 881px) {
+  .content__name .name__results .results__block .results__bigger .result {
+    font-size: 25px;
+    margin: 0 auto 10px auto;
+  }
+}
+@media (max-width: 690px) {
+  .content__name .name__results .results__block .results__bigger .result {
+    font-size: 16px;
+    margin: 0 auto 5px auto;
+  }
+}
+.content__name .name__results .results__block .results__text {
+  display: none;
+  flex-direction: column;
+  margin: 24px 0 0 0;
+}
+.content__name .name__results .results__block .results__text .select {
+  margin: 0 0 32px 0;
+}
+.content__name .name__results .results__block .results__text .select::after {
+  left: 170px;
+}
+.content__name .name__results .results__block .results__text textarea[disabled] {
+  width: 100%;
+  padding: 16px;
+  display: inline;
+  background-color: #FFF;
+  font-size: 18px;
+  resize: vertical;
+  color: #000;
+  -webkit-text-fill-color: #000;
+  opacity: 1;
+  background: #FFFFFF;
+  box-shadow: 0px 3px 14px rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  min-height: 400px;
+  margin: 0 0 24px 0;
+}
+.content__name .name__results .results__block .results__text button {
+  margin: 0 auto;
+  width: 2 0%;
+}
+@media (max-width: 700px) {
+  .content__name .name__results .results__block .results__text button {
+    width: 100%;
+  }
+}
+
+.dialog_element {
+  opacity: 0;
+  background-color: #01B401;
+  text-align: center;
+  width: 89.141px;
+  color: #FFFFFF;
+  border-radius: 2px;
+  padding: 5px 13px;
+  position: absolute;
+  z-index: 2;
+  pointer-events: none;
+  transition-property: opacity;
+}

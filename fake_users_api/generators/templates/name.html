@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+{% load static %}
+{% block css %}<link rel="stylesheet" href="{% static "css/generator_name.css" %}">{% endblock %}
+{% block title %}Generator name{% endblock %}
+{% block content %}
+<div class="content">
+    <div class="_container">
+        <div class="content__name">
+            <div class="name__title__block">
+                <h1 class="name__title title">
+                    Last name, first name and patronymic generator
+                </h1>
+                <div class="name__subtitle subtitle">
+                    Taking into account the actual frequency of their use in the modern world
+                </div>
+            </div>
+            <form class="name__form">
+                <div class="form__format">
+                    <div class="select">
+                        <label for="format_name">Format</label>
+                        <select id="format_name">
+                            <option value=0>Russian. Full name</option>
+                            <option value=1>Russian. First, last name</option>
+                            <option value=2>Russian. Last, first name</option>
+                            <option value=3>Russian. Last name and initials</option>
+                            <option value=4>Russian. First name and initials</option>
+                            <option value=5>Russian. First name</option>
+                            <option value=6>Eng. First name, last name</option>
+                            <option value=7>Eng. First name</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form__sex">
+                    <div class="select">
+                        <label for="sex">Sex</label>
+                        <select id="sex_name">
+                            <option value="any">Any</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form__count">
+                    <label for="count">Count</label>
+                    <input id="count_name" class="count" type="number" min="1" max="100" value="10">
+                </div>
+                <button type="button" onclick="AjaxName()" class="btn">Get</button>
+            </form>
+            <div class="name__null" id="name__null">
+                <p>
+                    Generates random names, Russian or English, in various formats. For Russian names, the
+                    generation of both full names and their various variations, including initials, is supported.
+                </p>
+                <p>
+                    We use lists of first and last names, taking into account the frequency of their use in the
+                    modern world. Therefore, we do not have exotic names and their combinations, and the result is
+                    as similar as possible to a list of real people.
+                </p>
+                <p>
+                    The received data can be formatted as a list using various separators, including for insertion
+                    into spreadsheets and documents.
+                </p>
+            </div>
+            <div class="name__results" id="name__results">
+                <div class="results__title">
+                    Results
+                </div>
+                <div class="results__time">
+                    01.09.2022 в 14:58:57 UTC+3
+                </div>
+                <div class="results__show_control">
+                    <button id="show_block" class="show_block active">
+                        <span>Block</span>
+                        <img src="{% static "img/icons/rectangle.svg" %}" alt="" class="svg">
+                    </button>
+                    <button id="show_text" class="show_text">
+                        <span>Text</span>
+                        <img src="{% static "img/icons/rectangle.svg" %}" alt="" class="svg">
+                    </button>
+                </div>
+                <hr>
+                <div class="results__block">
+                    <div id="results__bigger" class="results__bigger">
+                        <div id="results__bigger" class="results__bigger">
+                            <div class="result">Быкова Милица Яковлевна</div>
+                            <div class="result">Фомичева Прасковья Степановна</div>
+                            <div class="result">Кудрявцев Тимур Ермолаевич</div>
+                            <div class="result">Коновалова Валентина Аркадьевна</div>
+                            <div class="result">Евсеев Иннокентий Владиленович</div>
+                            <div class="result">Самойлов Глеб Исидорович</div>
+                            <div class="result">Веселова Юлия Евгеньевна</div>
+                            <div class="result">Мишина Олимпиада Анатольевна</div>
+                            <div class="result">Гуляева Фаина Феликсовна</div>
+                            <div class="result">Панов Ефрем Ефремович</div>
+                        </div>
+                    </div>
+                    <div id="results__text" class="results__text">
+                        <div class="select">
+                            <select name="" id="textarea_params">
+                                <option value=0>Line break</option>
+                                <option value=1>A, B, C (comma and space)</option>
+                                <option value=2>A; B; C (semicolon and space)</option>
+                                <option value=3>A,B,C (comma)</option>
+                                <option value=4>A;B;C (semicolon)</option>
+                            </select>
+                        </div>
+                        <textarea id="textarea_name" cols="1000" rows="20" class="text__block" disabled>
+Сидоров Владимир Миронович
+Ермаков Дмитрий Артёмович
+Спиридонова Милана Степановна
+Белоусов Дмитрий Кириллович
+Смирнов Роман Антонович
+Королева Виктория Егоровна
+Губанова Дарья Глебовна
+Абрамова Елизавета Ивановна
+Михайлова Камилла Савельевна
+                        </textarea>
+                        <button onclick="CopyTextArea()" class="btn">Copy</button>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <div id="dialog_element" class="dialog_element">
+        Copy
+    </div>
+    <div class="alert" id="alert"></div>
+</div>
+{% endblock %}
+{% block script %} <script src="{% static 'js/name_scripts.js' %}"></script> {% endblock %}

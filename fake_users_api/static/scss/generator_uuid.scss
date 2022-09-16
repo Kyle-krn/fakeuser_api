@@ -1,0 +1,104 @@
+$secondary_color: #B88ACB;
+
+
+.content__uuid {
+    & .content__subtitle{
+        margin: 0 0 43px 0  ;
+    }
+    & .received_block{
+        @media(max-width: 555px){
+            height: 100%;
+        }
+        & .received_block__text{
+            text-align: center;
+            font-size: 28px;
+            white-space: normal;
+            line-height: 25px;
+        }
+        & .received_block__icons{
+            & svg {
+                @media(max-width: 555px){
+                    height: 35px;
+                    width: 35px;
+                }
+            }
+        }
+    }
+
+    & .generate__uuid {
+        margin: 50px 0 0 0;
+        display: flex;
+        column-gap: 10px;
+        row-gap: 10px;
+        justify-content: center;
+        flex-wrap: wrap;
+        // align-items: flex-start;
+        align-items: none;
+        & .uuid__block{
+            padding: 24px 16px 33px 16px;
+            width: 450px;
+            background: #FFFFFF;
+            box-shadow: 0px 3px 14px rgba(0, 0, 0, 0.1);
+            border-radius: 6px;
+
+            @media (max-width: 743px) {
+                width: 100%;
+            }
+            
+            & .uuid__header{
+                font-weight: 700;
+                font-size: 27px;
+                text-align: center;
+                margin: 0 0 16px 0;
+
+            }
+            & .uuid__body{
+                border-top: 2px solid $secondary_color;
+                border-bottom: 2px solid $secondary_color;
+                & .uuid__body__how-many{
+                    padding: 22px 0;
+                }
+                & .uuid__body__control{
+                    display: none;
+                    margin: 0 auto 24px auto;
+                    text-align: center;
+                    & button{
+                        color: #FFFFFF;
+                        font-size: 16px;
+                        padding: 8px 26px;
+                        background: #C6C6C6;
+                        border-radius: 3px;
+                        &:not(:last-child){
+                            margin: 0 24px 0 0;
+                        }
+                    }
+                }
+                & .uuid__body__results{
+                    padding: 0 0 25px 0;
+                    text-align: center;
+                    & .uuid__result{
+                        font-size: 15px;
+                        font-weight: 700;
+                        &:not(:last-child){
+                            margin: 0 0 8px 0;
+                        }
+                    }
+                }
+            }
+            & .uuid__footer{
+                margin: 16px 0 0 0;
+                & .uuid__footer__title{
+                    text-align: center;
+                    font-size: 25px;
+                    margin: 0 0 10px 0;
+                }
+                & .uuid__footer__text{
+                    font-size: 17px;
+                    text-align: center;
+                }
+            }
+        }
+    }
+}
+
+    

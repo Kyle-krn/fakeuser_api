@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% load static %}
+{% block css %}<link rel="stylesheet" href="{% static "css/generator_uuid.css" %}">{% endblock %}
+{% block title %}Generator UUID{% endblock %}
+{% block content %}
+<div class="content">
+    <div class="_container">
+        <div class="content__uuid">
+            <h1 class="content__title title">Generate UUID</h1>
+            <h4 class="content__subtitle subtitle">Use our online generator to instantly create random UUID/GUID.
+            </h4>
+            <div class="received_block">
+                <div class="received_block__btn">
+                    <div class="btn-group">
+                        <button data="v4" id="uuidv4_btn_id" class="active">UUIDv4</button>
+                        <button data="v1" id="uuidv1_btn_id" class="">UUIDv1</button>
+                        <button data="empty" id="empty_btn_id" class="">Empty</button>
+                    </div>
+                </div>
+                <div class="received_block__text">
+                    <span id="uuid">17e2984d-5b97-433c-827f-8b229a6670b8</span>
+                </div>
+                <div class="received_block__icons">
+                    <img src="{% static 'img/icons/copy.svg' %}" id="icon_copy" alt="" class="svg icon_copy">
+                    <img src="{% static 'img/icons/refresh.svg' %}" id="icon_refresh" alt="" class="svg icon_refresh">
+                </div>
+            </div>
+            <div class="generate__uuid">
+                <div class="uuid__block uuid_1">
+                    <div class="uuid__header">
+                        UUIDv1 Generator
+                    </div>
+                    <div class="uuid__body">
+                        <div class="uuid__body__how-many">
+                            <div class="input-double-btn">
+                                <input id="uuid1_input_id" type="number" placeholder="Max. 100" min="1" max="100" value=1>
+                                <a href="" data="1" id="uuid1_download_id" download="code.txt"><img src="{% static '/img/icons/download.svg' %}" alt="" class="svg"></a>
+                                <button onclick="MultipleButton(1)"><img src="{% static '/img/icons/puzzle.svg' %}" alt="" class="svg"></button>
+                            </div>
+                        </div>
+                        <div id="uuid1__body__control_id" class="uuid__body__control">
+                            <button onclick="CopyUUIDBlock(1)">Copy</button>
+                            <button onclick="ClearUUIDBlock(1)">Delete</button>
+                        </div>
+                        <div id="uuid1_body_id" class="uuid__body__results"></div>
+                    </div>
+                    <div class="uuid__footer">
+                        <div class="uuid__footer__title">
+                            What is a Version 1 UUID?
+                        </div>
+                        <div class="uuid__footer__text">
+                            A Version 1 UUID is a universally unique identifier that is generated using a timestamp
+                            and
+                            the MAC address of the computer on which it was generated.
+                        </div>
+                    </div>
+                </div>
+                <div class="uuid__block uuid_4">
+                    <div class="uuid__header">
+                        UUIDv4 Generator
+                    </div>
+                    <div class="uuid__body">
+                        <div class="uuid__body__how-many">
+                            <div class="input-double-btn">
+                                <input id="uuid4_input_id" type="number" placeholder="Max. 100" value="1">
+                                <!-- <button><img src="/img/icons/download.svg" alt="" class="svg"></button> -->
+                                <a href="" data=4 id="uuid4_download_id" download="code.txt"><img src="{% static '/img/icons/download.svg' %}" alt="" class="svg"></a>
+                                <button onclick="MultipleButton(4)"><img src="{% static '/img/icons/puzzle.svg' %}" alt="" class="svg"></button>
+                            </div>
+                        </div>
+                        <div id="uuid4__body__control_id" class="uuid__body__control">
+                            <button onclick="CopyUUIDBlock(4)">Copy</button>
+                            <button onclick="ClearUUIDBlock(4)">Delete</button>
+                        </div>
+                        <div id="uuid4_body_id" class="uuid__body__results"></div>
+                    </div>
+                    <div class="uuid__footer">
+                        <div class="uuid__footer__title">
+                            What is a Version 4 UUID?
+                        </div>
+                        <div class="uuid__footer__text">
+                            A Version 4 UUID is a universally unique identifier that is generated using random
+                            numbers. The Version 4 UUIDs produced by this site were generated using a secure random
+                            number generator.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="alert" id="alert"></div>
+</div>
+{% endblock %}
+{% block script %} <script src="{% static 'js/uuid_scripts.js' %}"></script> {% endblock %}

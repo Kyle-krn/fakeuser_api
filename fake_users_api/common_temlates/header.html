@@ -1,27 +1,56 @@
 {% load static %}
 
-<header class="header">
+<header class="header" id="header_id">
     <div class="_container">
         <div class="header__content">
+            <div class="header__up">
+                <a href="#content_id">
+                    <img src="{% static "img/icons/arrow.svg" %}" alt="" class="svg">
+                </a>
+            </div>
             <div class="header__logo logo">
-                <img src="{% static "img/icons/generator.svg" %}" alt="" class="logo">
+                <img src="{% static "img/icons/user_logo.svg" %}" alt="" class="logo">
+            </div>
+            <div class="header__burger">
+                <span></span>
             </div>
             <nav class="header__menu menu">
                 <ul class="menu__list">
                     <li class="menu__item">
-                        <a href="{% url 'generators:generator_password' %}" class="menu__link">Generate password</a>
+                        <a href="{% url 'generators:generator_password' %}" class="menu__link">
+                            <img src="{% static "img/icons/pass_header.svg" %}" alt="" class="svg">
+                            <span>Generate password</span>
+                        </a>
                     </li>
                     <li class="menu__item">
-                        <a href="#" class="menu__link">Generate nickname</a>
+                        <a href="#" class="menu__link">
+                            <img src="{% static "img/icons/id_1.svg" %}" alt="" class="svg">
+                            <span>Generate nickname</span>
+                        </a>
                     </li>
                     <li class="menu__item">
-                        <a href="#" class="menu__link">Generate GUID/UUID</a>
+                        <a href="{% url 'generators:generator_name' %}" class="menu__link">
+                            <img src="{% static "img/icons/id_2.svg" %}" alt="" class="svg">
+                            <span>Generate name</span>
+                        </a>
                     </li>
                     <li class="menu__item">
-                        <a href="#" class="menu__link">Generate user api</a>
+                        <a href="{% url 'generators:generator_uuid' %}" class="menu__link">
+                            <img src="{% static "img/icons/barcode.svg" %}" alt="" class="svg">
+                            <span>Generate GUID/UUID</span>
+                        </a>
                     </li>
                     <li class="menu__item">
-                        <a href="{% url 'parse:parse_photo' %}" class="menu__link">Parse vk</a>
+                        <a href="{% url 'api:random_user' %}" class="menu__link">
+                            <img src="{% static "img/icons/api.svg" %}" alt="" class="svg">
+                            <span>Generate user api</span>
+                        </a>
+                    </li>
+                    <li class="menu__item">
+                        <a href="{% url 'swagger-ui' %}" class="menu__link">
+                            <img src="{% static "img/icons/code.svg" %}" alt="" class="svg">
+                            <span>Swagger</span>
+                        </a>
                     </li>
                 </ul>
             </nav>
