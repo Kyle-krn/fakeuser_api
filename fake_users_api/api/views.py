@@ -9,6 +9,7 @@ from generators import utils as generator_utils
 from faker import Faker
 import random
 from . import serializers
+from . import models
 
 
 @extend_schema(
@@ -19,9 +20,9 @@ from . import serializers
         responses=serializers.UserResponseSerializer,
     )
 class ApiView(APIView):
-    renderer_classes = JSONRenderer,TemplateHTMLRenderer, BrowsableAPIRenderer, XMLRenderer, YAMLRenderer
+    renderer_classes = JSONRenderer, BrowsableAPIRenderer, XMLRenderer, YAMLRenderer
     serializer_class = serializers.UserResponseSerializer
-    template_name = 'api.html'
+    # template_name = 'api.html'
 
     def get_query_params(self):
         gender = self.request.query_params.get('gender')
@@ -31,18 +32,18 @@ class ApiView(APIView):
         count = int(self.request.query_params.get('count')) if self.request.query_params.get('count') and self.request.query_params.get('count').isdigit() else 1
         seed = self.request.query_params.get('seed') if  self.request.query_params.get('seed') else generator_utils.generate_password(length=15)
         if count < 1: count = 1
-        if count > 100: count = 100
+        if count > 700: count = 700
         return gender, local, include, exclude, count, seed
  
     def get(self, request, format=None):
         gender, local, include, exclude, count, seed = self.get_query_params()
-        print(format)
         faker = Faker(['ru_RU', 'en_US', 'az_AZ', 'bn_BD', 'cs_CZ', 'da_DK', 'de_DE', 'el_GR', 'es_CL'])
         faker.seed_instance(seed)
         random.seed(seed)
+        photo_models_male,photo_models_female  = models.UserPhoto.objects.filter(gender='male'), models.UserPhoto.objects.filter(gender='female')
         data = {
             'count': count,
-            'results': [generator_utils.RandomUser(gender=gender, localization=random.choice(local), user_faker=faker).return_dict(include=include, exclude=exclude) for i in range(count)],
+            'results': [generator_utils.RandomUser(gender=gender,photo_models=(photo_models_male,photo_models_female), localization=random.choice(local), user_faker=faker).return_dict(include=include, exclude=exclude) for i in range(count)],
             'seed': seed
         }
         serializer = self.serializer_class(data=data)

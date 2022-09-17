@@ -8,23 +8,24 @@ function UserPanelClick() {
 }
 
 function UserPanelText(data) {
+  let en = $.cookie('django_language') == 'en'
     if (data == 'name') {
-        $('#info__subtitle').text('Hi, my name is');
+        $('#info__subtitle').text(en ? 'Hi, my name is': 'Привет, меня зовут');
         $('#info__text').text(user_data.name.first_name + " " + user_data.name.last_name);
       } else if (data == 'email') {
-        $('#info__subtitle').text('My email is')
+        $('#info__subtitle').text(en ? 'My email is': 'Мой email')
         $('#info__text').text(user_data.email)
       } else if (data == 'bday') {
-        $('#info__subtitle').text('My birthday is')
+        $('#info__subtitle').text(en ? 'My birthday is': 'Моё день рождение')
         $('#info__text').text(user_data.dob.date)
       } else if (data == 'address') {
-        $('#info__subtitle').text('My address is')
+        $('#info__subtitle').text(en ? 'My address is': 'Мой адрес')
         $('#info__text').text(user_data.location.street + " " + user_data.location.house)
       } else if (data == 'phone') {
-        $('#info__subtitle').text('My phone is')
+        $('#info__subtitle').text(en ? 'My phone is': 'Мой телефон')
         $('#info__text').text(user_data.phone)
       } else if (data == 'password') {
-        $('#info__subtitle').text('My password is')
+        $('#info__subtitle').text(en ? 'My password is': 'Мой пароль')
         $('#info__text').text(user_data.login.password)
       }
 }
@@ -35,8 +36,8 @@ $('.user__photo').click(UserApiAjax)
 
 let user_data; 
 function UserApiAjax() {
-      GetAJAX(url="api/").done(function (data) {
-        // $('span#uuid').text(data.results[0])
+      let url = $.cookie('django_language') == 'en' ? 'api/': 'api/?local=ru'
+      GetAJAX(url=url).done(function (data) {
         user_data = data.results[0];
         $('#info__text').text(user_data.name.first_name + " " + user_data.name.last_name);
         $('#user_photo_id').attr('src', user_data.photo.medium);

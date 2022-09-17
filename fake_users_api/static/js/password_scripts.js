@@ -1,5 +1,14 @@
 $(function(){
     AjaxPassword()
+    let ru = $.cookie('django_language') == 'ru';
+    if (window.matchMedia('(max-width: 367px)').matches && ru) StyleForRus(3)
+    else if (window.matchMedia('(max-width: 458px)').matches && ru) StyleForRus(10)
+
+    function StyleForRus(gap) {
+        $(".form").css('column-gap', gap +'px')
+        $(".presets_radio").css('font-size', '15px')
+        $(".settings_password").css('font-size', '13px')
+    }
 
     $(document).on('click', '#icon_copy', function(event){
         Copy($(".received_block__text span"))

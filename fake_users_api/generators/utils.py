@@ -207,22 +207,22 @@ def func_locale(country_name: str):
 class RandomUser:
     def __init__(self,
                  user_faker: Faker,
+                 photo_models: List,
                  gender: Literal['male', 'female'] = None, 
-                 localization: List = None,
+                 localization: List = None
                  ) -> None:
-        self.gender = gender if gender in ('male', 'female') else random.choice(('male', 'female'))
+        self.gender = gender if gender in ('male', 'female') else random.choice(('male', 'female')) #643ms
         self.localization = localization if localization in NATIONALITY else 'us'
         locale, nat = func_locale(self.localization)
-        self.faker = user_faker[locale]
-
-        self.nat = nat
-        self.__init_name()
-        self.__init_address()
-        self.email = self.faker.email()
-        self.__init_login()
+        self.faker = user_faker[locale] #618ms
+        self.nat = nat #623ms
+        self.__init_name() #978ms
+        self.__init_address() #3s
+        self.email = self.faker.email() #3s
+        self.__init_login() #3.68s
         self.__init_job()
         self.age = None
-        self.__init_photo()
+        self.__init_photo(photo_models[0 if self.gender == 'male' else 1])
         self.__init_dob()
         self.registered = random_datetime()
         self.__init_phone_number()
@@ -240,13 +240,13 @@ class RandomUser:
         }
         
     def __init_address(self) -> None:
-        tz_name, self.location = random_address(self.localization, self.faker)
+        tz_name, self.location = random_address(self.localization, self.faker) #2.19s
         if self.localization == 'bgd':
             tz_name = 'Asia/Dhaka'
         self.timezone = generate_timezone(tz_name)
 
-    def __init_photo(self) -> None:
-        photo_model = random.choice(models.UserPhoto.objects.filter(gender=self.gender))
+    def __init_photo(self, photo_models) -> None:
+        photo_model = random.choice(photo_models)
         self.age = photo_model.age
         self.photo = {
             'small': settings.HOST + photo_model.photo_100.url,
@@ -292,5 +292,5 @@ class RandomUser:
         if len(fields) == 0:
             fields = self.__accept_fields
         fields = [i for i in fields if i not in exclude]
-        return {i: getattr(self, i) for i in fields}
+        return {i: getattr(self, i) for i in fields if i in self.__dict__}
         

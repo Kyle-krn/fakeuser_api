@@ -1,4 +1,10 @@
 {% load static %}
+{% load i18n %}
+{% load static i18n %}
+
+{% get_current_language as LANGUAGE_CODE %}
+{% get_available_languages as LANGUAGES %}
+{% get_language_info_list for LANGUAGES as languages %}
 
 <header class="header" id="header_id">
     <div class="_container">
@@ -19,31 +25,31 @@
                     <li class="menu__item">
                         <a href="{% url 'generators:generator_password' %}" class="menu__link">
                             <img src="{% static "img/icons/pass_header.svg" %}" alt="" class="svg">
-                            <span>Generate password</span>
+                            <span>{% trans 'Generate password' %}</span>
                         </a>
                     </li>
                     <li class="menu__item">
                         <a href="#" class="menu__link">
                             <img src="{% static "img/icons/id_1.svg" %}" alt="" class="svg">
-                            <span>Generate nickname</span>
+                            <span>{% trans 'Generate nickname' %}</span>
                         </a>
                     </li>
                     <li class="menu__item">
                         <a href="{% url 'generators:generator_name' %}" class="menu__link">
                             <img src="{% static "img/icons/id_2.svg" %}" alt="" class="svg">
-                            <span>Generate name</span>
+                            <span>{% trans 'Generate name' %}</span>
                         </a>
                     </li>
                     <li class="menu__item">
                         <a href="{% url 'generators:generator_uuid' %}" class="menu__link">
                             <img src="{% static "img/icons/barcode.svg" %}" alt="" class="svg">
-                            <span>Generate GUID/UUID</span>
+                            <span>{% trans 'Generate UUID' %}</span>
                         </a>
                     </li>
                     <li class="menu__item">
-                        <a href="{% url 'api:random_user' %}" class="menu__link">
+                        <a href="{% url 'api_documentation' %}" class="menu__link">
                             <img src="{% static "img/icons/api.svg" %}" alt="" class="svg">
-                            <span>Generate user api</span>
+                            <span>{% trans 'API' %}</span>
                         </a>
                     </li>
                     <li class="menu__item">
@@ -52,8 +58,34 @@
                             <span>Swagger</span>
                         </a>
                     </li>
+                    <li class="menu__item">
+                        <form class="lang_mobile" action="{% url 'set_language' %}" method="post">
+                            {% csrf_token %}
+                            <input name="next" type="hidden" value="{{ redirect_to }}">
+                            <div class="change_lang_block">
+                                <input class="radio_lang {% if LANGUAGE_CODE == 'ru' %}active{% endif %}" type="radio" id="contactChoice1"
+                                name="language" value="ru" {% if LANGUAGE_CODE == 'ru' %}selected{% endif %}>
+                                <label for="contactChoice1">Ru</label>
+                                <input class="radio_lang {% if LANGUAGE_CODE == 'en' %}active{% endif %}" type="radio" id="contactChoice2"
+                                    name="language" value="en" {% if LANGUAGE_CODE == 'en' %}selected{% endif %}>
+                                <label for="contactChoice2">Eng</label>
+                            </div>
+                        </form>
+                    </li>
                 </ul>
             </nav>
         </div>
+        <form action="{% url 'set_language' %}" method="post">
+            {% csrf_token %}
+            <input name="next" type="hidden" value="{{ redirect_to }}">
+            <div class="change_lang_block">
+                <input class="radio_lang {% if LANGUAGE_CODE == 'ru' %}active{% endif %}" type="radio" id="contactChoice1"
+                name="language" value="ru" {% if LANGUAGE_CODE == 'ru' %}selected{% endif %}>
+                <label for="contactChoice1">Ru</label>
+                <input class="radio_lang {% if LANGUAGE_CODE == 'en' %}active{% endif %}" type="radio" id="contactChoice2"
+                    name="language" value="en" {% if LANGUAGE_CODE == 'en' %}selected{% endif %}>
+                <label for="contactChoice2">Eng</label>
+            </div>
+        </form>
     </div>
 </header>

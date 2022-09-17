@@ -66,6 +66,9 @@
                 display: flex;   
                 column-gap: 20px;
                 & .menu__item {
+                    & .lang_mobile{
+                        display: none;
+                    }
                     & .menu__link {
                         display: flex;
                         flex-direction: column;
@@ -85,10 +88,54 @@
             }
         }
     }
+
+    .change_lang_block{
+        display: flex;
+        flex-direction: column;
+        row-gap: 4px;
+        color: #FFFFFF;
+        position: absolute;
+        right: 20px;
+        top: 15px;
+        & .radio_lang{
+            &.active{
+                &+label{
+                    color: black;
+                }
+            }
+    
+            &+label{
+                
+                writing-mode: vertical-lr; 
+                text-transform: uppercase;
+                padding-left: 0;
+                &::before{
+                    content: none;
+                }
+                &::after{
+                    content: none;
+                }
+    
+                &:nth-child(2){
+                    &::after{
+                        content: '|';
+                        color: #000;
+                        font-size: 20px;
+                        position: relative;
+                        top: 2px;
+                        // height: 1px;
+                        // width: 1px;
+                        opacity: 1;
+                        background-color: rgba(0,0,0,0);
+                    }
+                }
+            }
+        }
+    }
 }
 
 
-@media (max-width: 1064px) {
+@media (max-width: 1200px) {
     body.lock{
         overflow: hidden;
     }
@@ -208,9 +255,34 @@
                                 font-size: 30px;
                             }
                         }
+                        & .lang_mobile{
+                            display: block;
+                            position: relative;
+                            top: 30px;
+                            left: 28px;
+                            & .change_lang_block{
+                                display: block;
+                                position: relative;
+                                & .radio_lang+label{
+                                    font-size: 30px;
+                                    writing-mode: horizontal-tb;
+                                    &:nth-child(2){
+                                        &::after{
+                                            font-size: 35px;
+                                            top: -3px;
+                                            left: 2px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
+
                 }
             }
+        }
+        & .change_lang_block{
+            display: none;
         }
     }
 }

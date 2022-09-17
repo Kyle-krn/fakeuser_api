@@ -54,3 +54,8 @@ $(window).on("scroll", function() {
   if ($(window).scrollTop() > 50) $('.header').addClass('fixed');
         else $('.header').removeClass('fixed');
   });
+
+$(".radio_lang").on('change', function(){
+    this.form.submit();
+    // alert($(this).val())
+  })

@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from django.conf.urls.i18n import i18n_patterns
 
 app_name = "generators"
 
@@ -12,3 +13,7 @@ urlpatterns = [
     path('ajax_uuid/', views.generate_uuid_ajax, name="ajax_uud"),
 
 ]
+
+# urlpatterns += i18n_patterns(
+#     path('generate_password/', views.TemplateView.as_view(), name="generator_password"),
+# )

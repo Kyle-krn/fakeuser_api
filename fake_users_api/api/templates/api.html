@@ -1,7 +1,8 @@
 {% extends "base.html" %}
 {% load static %}
 {% block css %}<link rel="stylesheet" href="{% static "css/api_styles.css" %}">{% endblock %}
-{% block title %}Api documentation{% endblock %}
+{% load static i18n %}
+{% block title %}{% trans 'Api documentation' %}{% endblock %}
 {% block content %}
 <div class="content" id="content_id">
     <div class="_container_api">
@@ -11,58 +12,45 @@
                     <img id="user_photo_id" src="{% static "img/avatar.svg" %}" alt="svg">
                 </div>
                 <div class="user__info">
-                    <p class="info__subtitle" id="info__subtitle">Hi, my name is</p>
+                    <p class="info__subtitle" id="info__subtitle">{% trans 'Hi, my name is' %}</p>
                     <span id="info__text">...</span>
                 </div>
                 <div class="user__navigation">
                     <ul>
                         <li class="list active" data="name">
-                            <!-- <a href="#">  -->
                             <div class="list__item">
                                 <img src="{% static "img/icons/user.svg" %}" alt="" class="svg icon">
-                                <span class="text">Name</span>
-                                <!-- </a> -->
+                                <span class="text">{% trans 'Name' %}</span>
                             </div>
                         </li>
                         <li class="list" data="email">
-                            <!-- </div> -->
-                            <!-- <a href="#"> -->
                             <div class="list__item">
                                 <img src="{% static "img/icons/email.svg" %}" alt="" class="svg icon">
                                 <span class="text">Email</span>
-                                <!-- </a> -->
                             </div>
                         </li>
                         <li class="list" data="bday">
                             <div class="list__item">
-                                <!-- <a href="#"> -->
                                 <img src="{% static "img/icons/calendar.svg" %}" alt="" class="svg icon">
-                                <span class="text">Birthday</span>
-                                <!-- </a> -->
+                                <span class="text">{% trans 'Birthday' %}</span>
                             </div>
                         </li>
                         <li class="list" data="address">
-                            <!-- <a href="#"> -->
                             <div class="list__item">
                                 <img src="{% static "img/icons/location.svg" %}" alt="" class="svg icon">
-                                <span class="text">Address</span>
-                                <!-- </a> -->
+                                <span class="text">{% trans 'Address' %}</span>
                             </div>
                         </li>
                         <li class="list" data="phone">
-                            <!-- <a href="#"> -->
                             <div class="list__item">
                                 <img src="{% static "img/icons/phone.svg" %}" alt="" class="svg icon">
-                                <span class="text">Phone</span>
-                                <!-- </a> -->
+                                <span class="text">{% trans 'Phone' %}</span>
                             </div>
                         </li>
                         <li class="list" data="password">
-                            <!-- <a href="#"> -->
                             <div class="list__item">
                                 <img src="{% static "img/icons/lock.svg" %}" alt="" class="svg icon">
-                                <span class="text">Password</span>
-                                <!-- </a> -->
+                                <span class="text">{% trans 'Password' %}</span>
                             </div>
                         </li>
                         <div class="indicator"></div>
@@ -70,29 +58,27 @@
                 </div>
             </div>
             <div class="navigation__doc">
-                <button class="collapse_btn"><span>Navigation</span><img src="{% static "img/icons/arrow.svg" %}" alt=""
+                <button class="collapse_btn"><span>{% trans 'Navigation' %}</span><img src="{% static "img/icons/arrow.svg" %}" alt=""
                         class="svg" id="collapse_img_id"></button>
                 <div class="navigation__block">
-                    <a href="#how_to_use_id" class="navigation__link">How to use</a>
-                    <a href="#results_id" class="navigation__link">Results</a>
-                    <a href="#multiple_users_id" class="navigation__link">Requesting Multiple Users</a>
-                    <a href="#gender_id" class="navigation__link">Gender</a>
-                    <a href="#seed_id" class="navigation__link">Seeds</a>
-                    <a href="#formats_id" class="navigation__link">Formats</a>
-                    <a href="#nat_id" class="navigation__link">Nationalities</a>
-                    <a href="#inc_exc_id" class="navigation__link">Including/Excluding fields</a>
+                    <a href="#how_to_use_id" class="navigation__link">{% trans 'How to use' %}</a>
+                    <a href="#results_id" class="navigation__link">{% trans 'Results' %}</a>
+                    <a href="#multiple_users_id" class="navigation__link">{% trans 'Requesting Multiple Users' %}</a>
+                    <a href="#gender_id" class="navigation__link">{% trans 'Gender' %}</a>
+                    <a href="#seed_id" class="navigation__link">{% trans 'Seeds' %}</a>
+                    <a href="#formats_id" class="navigation__link">{% trans 'Formats' %}</a>
+                    <a href="#nat_id" class="navigation__link">{% trans 'Nationalities' %}</a>
+                    <a href="#inc_exc_id" class="navigation__link">{% trans 'Including/Excluding fields' %}</a>
                 </div>
             </div>
             <div class="how_to_use__block api__block">
-                <div class="how_to_use__title api__title">How to use</div>
+                <div class="how_to_use__title api__title">{% trans 'How to use' %}</div>
                 <div class="how_to_use__text api__text">
-                    <p>
-                        You can use AJAX to call the Random User Generator API and will receive a
-                        randomly generated user in return.
+                    <p>{% trans 'You can use AJAX to call the Random User Generator API and will receive a randomly generated user in return.' %}
+                        
                     </p>
-                    <p>
-                        If you are using jQuery, you can use the $.ajax() function in the
-                        code snippet below to get started.
+                    <p>{% trans 'If you are using jQuery, you can use the $.ajax() function in the code snippet below to get started.' %}
+                        
                     </p>
                 </div>
                 <div id="how_to_use_id" class="how_to_use__code code">
@@ -130,16 +116,14 @@
             </div>
             <div id="results_id" class="results__block api__block">
                 <div class="results__title api__title">
-                    Results
+                    {% trans 'Results' %}
                 </div>
                 <div class="results__text api__text">
-                    <p>
-                        The application will provide you with a JSON, XML, CSV, or YAML object that you can parse
-                        and
-                        apply to your application.
+                    <p>{% trans 'The application will provide you with a JSON, XML, CSV, or YAML object that you can parse and apply to your application.' %}
+                        
                     </p>
-                    <p>
-                        You can specify the format you want the results in using the format parameter.
+                    <p>{% trans 'You can specify the format you want the results in using the format parameter.' %}
+                        
                     </p>
                 </div>
                 <pre class="white">
@@ -205,11 +189,10 @@
             </div>
             <div id="multiple_users_id" class="multiple_users__block api__block">
                 <div class="api__title">
-                    Requesting Multiple Users
+                    {% trans 'Requesting Multiple Users' %}
                 </div>
-                <div class="api__text">
-                    Random User Generator allows you to fetch up to 5,000 generated users in one request using the
-                    results parameter.
+                <div class="api__text">{% trans 'Random User Generator allows you to fetch up to 700 generated users in one request using the results parameter.' %}
+                    
                 </div>
                 <pre class="white">
 
@@ -218,20 +201,17 @@ http://127.0.0.1:8000/api/?<span class="pink">count=10</span>
             </div>
             <div id="gender_id" class="gender__block api__block">
                 <div class="api__title">
-                    Gender
+                    {% trans 'Gender' %}
                 </div>
                 <div class="api__text">
-                    <p>
-                        You can specify whether you would like to have only male or only female users generated by
-                        adding the gender parameter to your request.
+                    <p>{% trans 'You can specify whether you would like to have only male or only female users generated by adding the gender parameter to your request.' %}
+                        
                     </p>
-                    <p>
-                        Valid values for the gender parameter are "male" or
-                        "female", or you may leave the parameter blank.
+                    <p>{% trans 'Valid values for the gender parameter are "male" or "female", or you may leave the parameter blank.' %}
+                        
                     </p>
-                    <p>
-                        Any other value will cause the service to return
-                        both male and female users.
+                    <p>{% trans 'Any other value will cause the service to return both male and female users.' %}
+                        
                     </p>
                 </div>
                 <pre class="white">
@@ -241,14 +221,11 @@ http://127.0.0.1:8000/api/?<span class="pink">gender=male</span>
 </pre>
             </div>
             <div id="seed_id" class="seed__block api__block">
-                <div class="api__title">Seeds</div>
+                <div class="api__title">{% trans 'Seeds' %}</div>
                 <div class="api__text">
-                    <p>
-                        Seeds allow you to always generate the same set of users. For example, the
-                        seed "foobar" will always return results for Becky Sims. 
+                    <p>{% trans 'Seeds allow you to always generate the same set of users. For example, the seed "someseed" will always return results for Michael Robinson.' %}
                     </p>
-                    <p>
-                        Seeds can be any string or sequence of characters.
+                    <p>{% trans 'Seeds can be any string or sequence of characters.' %}    
                     </p>
                 </div>
                 <pre class="white">
@@ -257,49 +234,41 @@ http://127.0.0.1:8000/api/?<span class="pink">seed=someseed</span>
                 </pre>
             </div>
             <div id="formats_id" class="formats__block api__block">
-                <div class="api__title">Formats</div>
-                <div class="api__text">We currently offer the following data formats:</div>
+                <div class="api__title">{% trans 'Formats' %}</div>
+                <div class="api__text">{% trans 'We currently offer the following data formats' %}:</div>
                 <ul class="api__list">
                     <li><span>JSON (default)</span></li>
                     <li><span>CSV</span></li>
                     <li><span>YAML</span></li>
                     <li><span>XML</span></li>
                 </ul>
-                <div class="api__text">Just specify the format you would like returned by using the format
-                    parameter.</div>
+                <div class="api__text">{% trans 'Just specify the format you would like returned by using the format parameter.' %}</div>
                 <pre class="white">
 
 http://127.0.0.1:8000/api/?<span class="pink">format=csv</span>
                 </pre>
             </div>
             <div id="nat_id" class="nationality__block api__block">
-                <div class="api__title">Nationalities</div>
-                <div class="api__text">You can request a different nationality of a randomuser.</div>
-                <div class="api__text">Pictures won't be affected by this, but data such as location, cell/home
-                    phone, id, etc. will be more appropriate.</div>
+                <div class="api__title">{% trans 'Nationalities' %}</div>
+                <div class="api__text">{% trans 'You can request a different nationality of a randomuser.' %}</div>
+                <div class="api__text">{% trans "Pictures won't be affected by this, but data such as location, cell/home phone, id, etc. will be more appropriate" %}.</div>
                 <div class="list__nat api__text">ru, us, aze, bgd, cze, dnk, deu, grc, chl</div>
-                <div class="api__text">You can specify a nationality like so:</div>
+                <div class="api__text">{% trans 'You can specify a nationality like so' %}:</div>
                 <pre class="white">
 
 http://127.0.0.1:8000/api/?<span class="pink">local=ru</span>       
                 </pre>
-                <div class="api__text margin-top">Randomuser will return random nats by default. You can have some control with
-                    the nats that you'd like to have generated by specifying a comma seperated list:</div>
+                <div class="api__text margin-top">{% trans "Randomuser will return us nats by default. You can have some control with the nats that you'd like to have generated by specifying a comma seperated list" %}:</div>
                 <pre class="white">
 
 http://127.0.0.1:8000/api/?<span class="pink">local=ru,us,aze,bgd</span>       
                 </pre>
             </div>
             <div id="inc_exc_id" class="inc-exc__block api__block">
-                <div class="api__title">Including/Excluding fields</div>
-                <div class="api__text">Sometimes, maybe you want some random names and not extraneous data such as
-                    location, phone, etc.
-                    Using the inc and exc parameters, you can specify which fields to include or exclude
-                    respectively.</div>
-                <div class="api__text">By specifying only the fields you want, the generator can save time by
-                    skipping CPU intensive fields like "login" for example.</div>
+                <div class="api__title">{% trans 'Including/Excluding fields' %}</div>
+                <div class="api__text">{% trans 'Sometimes, maybe you want some random names and not extraneous data such as location, phone, etc. Using the include and exclude parameters, you can specify which fields to include or exclude respectively.' %}</div>
                 <div class="api__text">
-                    These parameters accept the following values in a comma delimited list
+                    {% trans 'These parameters accept the following values in a comma delimited list' %}:
                 </div>
                 <ul class="api__list">
                     <li><span>gender</span></li>
@@ -316,12 +285,12 @@ http://127.0.0.1:8000/api/?<span class="pink">local=ru,us,aze,bgd</span>
                     <li><span>nat</span></li>
                     <li><span>ssn</span></li>
                 </ul>
-                <div class="api__text">If you only wanted the names,nats,and locations of users:</div>
+                <div class="api__text">{% trans 'If you only wanted the names,nats,and locations of users' %}:</div>
                 <pre class="white">
 
 http://127.0.0.1:8000/api/?<span class="pink">include=name, nat, location</span>           
                 </pre>
-                <div class="api__text margin-top">If you want everything except for login data:</div>
+                <div class="api__text margin-top">{% trans 'If you want everything except for login data' %}:</div>
                 <pre class="white">
 
 http://127.0.0.1:8000/api/?<span class="pink">exclude=login</span>           
@@ -333,4 +302,7 @@ http://127.0.0.1:8000/api/?<span class="pink">exclude=login</span>
 <div class="alert" id="alert"></div>
 
 {% endblock %}
-{% block script %}<script src="{% static "js/api_scripts.js" %}"></script>{% endblock %}
+{% block script %}
+<script src="{% static "js/jquery.cookie.js" %}"></script>
+<script src="{% static "js/api_scripts.js" %}"></script>
+{% endblock %}

@@ -1,13 +1,14 @@
 {% extends "base.html" %}
 {% load static %}
+{% load static i18n %}
 {% block css %}<link rel="stylesheet" href="{% static "css/generator_uuid.css" %}">{% endblock %}
-{% block title %}Generator UUID{% endblock %}
+{% block title %}{% trans 'Generator UUID' %}{% endblock %}
 {% block content %}
-<div class="content">
+<div class="content" id="content_id">
     <div class="_container">
         <div class="content__uuid">
-            <h1 class="content__title title">Generate UUID</h1>
-            <h4 class="content__subtitle subtitle">Use our online generator to instantly create random UUID/GUID.
+            <h1 class="content__title title">{% trans 'Generate UUID' %}</h1>
+            <h4 class="content__subtitle subtitle">{% trans 'Use our online generator to instantly create random UUID/GUID' %}.
             </h4>
             <div class="received_block">
                 <div class="received_block__btn">
@@ -28,7 +29,7 @@
             <div class="generate__uuid">
                 <div class="uuid__block uuid_1">
                     <div class="uuid__header">
-                        UUIDv1 Generator
+                        UUIDv1 {% trans 'Generator' %}
                     </div>
                     <div class="uuid__body">
                         <div class="uuid__body__how-many">
@@ -39,25 +40,24 @@
                             </div>
                         </div>
                         <div id="uuid1__body__control_id" class="uuid__body__control">
-                            <button onclick="CopyUUIDBlock(1)">Copy</button>
-                            <button onclick="ClearUUIDBlock(1)">Delete</button>
+                            <button onclick="CopyUUIDBlock(1)">{% trans 'Copy' %}</button>
+                            <button onclick="ClearUUIDBlock(1)">{% trans 'Delete' %}</button>
                         </div>
                         <div id="uuid1_body_id" class="uuid__body__results"></div>
                     </div>
                     <div class="uuid__footer">
                         <div class="uuid__footer__title">
-                            What is a Version 1 UUID?
+                            {% trans 'What is a Version 1 UUID' %} ?
                         </div>
                         <div class="uuid__footer__text">
-                            A Version 1 UUID is a universally unique identifier that is generated using a timestamp
-                            and
-                            the MAC address of the computer on which it was generated.
+                            {% trans 'A Version 1 UUID is a universally unique identifier that is generated using a timestamp and the MAC address of the computer on which it was generated.' %}
+                            
                         </div>
                     </div>
                 </div>
                 <div class="uuid__block uuid_4">
                     <div class="uuid__header">
-                        UUIDv4 Generator
+                        UUIDv4 {% trans 'Generator' %}
                     </div>
                     <div class="uuid__body">
                         <div class="uuid__body__how-many">
@@ -69,19 +69,17 @@
                             </div>
                         </div>
                         <div id="uuid4__body__control_id" class="uuid__body__control">
-                            <button onclick="CopyUUIDBlock(4)">Copy</button>
-                            <button onclick="ClearUUIDBlock(4)">Delete</button>
+                            <button onclick="CopyUUIDBlock(4)">{% trans 'Copy' %}</button>
+                            <button onclick="ClearUUIDBlock(4)">{% trans 'Delete' %}</button>
                         </div>
                         <div id="uuid4_body_id" class="uuid__body__results"></div>
                     </div>
                     <div class="uuid__footer">
                         <div class="uuid__footer__title">
-                            What is a Version 4 UUID?
+                            {% trans 'What is a Version 4 UUID' %}?
                         </div>
                         <div class="uuid__footer__text">
-                            A Version 4 UUID is a universally unique identifier that is generated using random
-                            numbers. The Version 4 UUIDs produced by this site were generated using a secure random
-                            number generator.
+                            {% trans 'A Version 4 UUID is a universally unique identifier that is generated using random numbers. The Version 4 UUIDs produced by this site were generated using a secure random number generator' %}.
                         </div>
                     </div>
                 </div>
