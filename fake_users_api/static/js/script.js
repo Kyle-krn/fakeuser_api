@@ -50,12 +50,10 @@ function GetAJAX(url, data) {
 }
 
 $(window).on("scroll", function() {
-  // console.log($(window).scrollTop());
   if ($(window).scrollTop() > 50) $('.header').addClass('fixed');
         else $('.header').removeClass('fixed');
   });
 
 $(".radio_lang").on('change', function(){
     this.form.submit();
-    // alert($(this).val())
   })

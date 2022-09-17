@@ -106,7 +106,6 @@ function AjaxPassword() {
 function PasswordTextBlockWidth() {
     let text_width = $("#password")
     let block_width = $('.received_block').width() - ($(".received_block__icons").width()+24 + 12 + 25) - 5
-    console.log(`Text: ${text_width.width()} || Block: ${block_width}`)
     while (text_width.width() > block_width) {
         let FontSize = parseInt(text_width.css('font-size'))
         if (FontSize <= 18) break;

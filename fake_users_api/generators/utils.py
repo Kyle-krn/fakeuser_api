@@ -82,14 +82,16 @@ def generate_password(length: int, easy_to_read: bool = False, characters: List[
 
 
 def generate_name(count: int, 
-                  format: int = None, 
+                  lang: str, 
                   sex: Literal['male', 'female'] = 'any') -> List[str]:
     names = []
-    if format <= 5:
-        lang = 'ru'
-    else:
-        lang = 'us'
+    # if format <= 5:
+    #     lang = 'ru'
+    # else:
+    #     lang = 'us'
+    
     faker: Faker = common_faker['ru_RU' if lang == 'ru' else 'en_US']
+    
     if sex == 'any':
         gender = None
     else:
@@ -104,13 +106,6 @@ def generate_name(count: int,
             'last_name': getattr(faker, f'last_name_{gender}')(),
             'patronymic': getattr(faker, f'middle_name_{gender}')() if lang == 'ru' else None
         }
-
-        if format == 3:
-            name['first_name'] = name['first_name'][0] + "."
-            name['patronymic'] = name['patronymic'][0] + "."
-        elif format == 4:
-            name['last_name'] = name['last_name'][0] + "."
-            name['patronymic'] = name['patronymic'][0] + "."
         names.append(name)
     return names
 

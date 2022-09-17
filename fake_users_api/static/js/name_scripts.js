@@ -55,25 +55,18 @@ $('#count_name').on('input keyup', function(){
 });
 
 function AjaxName() {
+    let format_name = $("#format_name").val()
     input_data = {
         count: $("#count_name").val(),
-        format: $("#format_name").val(),
+        lang: format_name == 6 || format_name == 7? 'eng': 'ru',
         sex: $("#sex_name").val()  
     }
-    $.ajax({
-        crossdomain: true,
-        url: 'http://127.0.0.1:8000/generators/ajax_name/',         /* Куда отправить запрос */
-        method: 'POST',             /* Метод запроса (post или get) */
-        contentType: "application/json; charset=utf-8",
-        dataType: 'json',          /* Тип данных в ответе (xml, json, script, html). */
-        data: JSON.stringify(input_data),     /* Данные передаваемые в массиве */
-        success: function(data){   /* функция которая будет выполнена после успешного запроса.  */
+    GetAJAX('generators/ajax_name/', input_data).done(function(data){
             $("#name__null").css("display", "none")
+            InputName(data, format_name)
             $("#name__results").css("display", "flex")
-            InputName(data, input_data.format)
             InputTime()
-        }
-    });
+    })
 }
 
 function InputTime() {
@@ -86,14 +79,16 @@ function InputName(data, format) {
     $("#results__bigger").empty()
     let text_array = []; 
     $.each(data.names, function (index, value) {
-        if (format == 0 || format == 3) {
+        if (format == 0) {
          text = value.last_name + " " + value.first_name + " " + value.patronymic   
         } else if (format == 1 || format == 6) {
             text = text = value.first_name + " " + value.last_name
         } else if (format == 2) {
             text = text = value.last_name + " " + value.first_name
+        } else if(format == 3) {
+            text = value.last_name + " " + value.first_name[0] + ". " + value.patronymic[0] + '.'
         } else if (format == 4) {
-            text = value.first_name + " " + value.last_name + " " + value.patronymic
+            text = value.first_name + " " + value.last_name[0] + ". " + value.patronymic[0] + '.'
         } else if (format == 5 || format == 7) {
             text = value.first_name
         }

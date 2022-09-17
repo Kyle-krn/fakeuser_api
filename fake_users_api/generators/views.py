@@ -28,11 +28,15 @@ def generate_password_ajax(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST, headers={'Access-Control-Allow-Origin': '*'})
 
 
-@api_view(['POST'])
+@api_view(['GET'])
 def generate_name_ajax(request):
-    serializer = serializers.NameInputSerializer(data=request.data)
+    serializer = serializers.NameInputSerializer(data={
+        'count': request.query_params.get('count', 1),
+        'lang': request.query_params.get('lang', 'ru'),
+        'sex': request.query_params.get('sex', 'male'),
+    })
     if serializer.is_valid():
-        names = utils.generate_name(count=serializer.data['count'], format=serializer.data['format'], sex=serializer.data['sex'])
+        names = utils.generate_name(count=serializer.data['count'], lang=serializer.data['lang'], sex=serializer.data['sex'])
         return Response({"count": serializer.data['count'], "names": names}, status=status.HTTP_200_OK, headers={'Access-Control-Allow-Origin': '*'})
     else:
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST, headers={'Access-Control-Allow-Origin': '*'})

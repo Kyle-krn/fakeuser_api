@@ -26,7 +26,7 @@ NAME_FORMAT = {
 
 class NameInputSerializer(serializers.Serializer):
     count = serializers.IntegerField()
-    format = serializers.IntegerField()
+    lang = serializers.CharField()
     sex = serializers.CharField()
 
     def validate_count(self, value):
@@ -34,8 +34,8 @@ class NameInputSerializer(serializers.Serializer):
             return value
         raise serializers.ValidationError("Количество от 1 до 100")
 
-    def validate_format(self, value):
-        if value in NAME_FORMAT:
+    def validate_format_name(self, value):
+        if value in ('ru', 'eng'):
             return value
         raise serializers.ValidationError("Неверный формат")
 
