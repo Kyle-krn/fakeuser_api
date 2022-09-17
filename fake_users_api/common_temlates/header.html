@@ -15,25 +15,27 @@
                 </a>
             </div>
             <div class="header__logo logo">
-                <img src="{% static "img/icons/user_logo.svg" %}" alt="" class="logo">
+                <a href="{% url 'api_documentation' %}">
+                    <img src="{% static "img/icons/user_logo.svg" %}" alt="" class="logo">
+                </a>
             </div>
             <div class="header__burger">
                 <span></span>
             </div>
             <nav class="header__menu menu">
                 <ul class="menu__list">
-                    <li class="menu__item">
+                    <li class="menu__item"></a>
                         <a href="{% url 'generators:generator_password' %}" class="menu__link">
                             <img src="{% static "img/icons/pass_header.svg" %}" alt="" class="svg">
                             <span>{% trans 'Generate password' %}</span>
                         </a>
                     </li>
-                    <li class="menu__item">
+                    <!-- <li class="menu__item">
                         <a href="#" class="menu__link">
                             <img src="{% static "img/icons/id_1.svg" %}" alt="" class="svg">
                             <span>{% trans 'Generate nickname' %}</span>
                         </a>
-                    </li>
+                    </li> -->
                     <li class="menu__item">
                         <a href="{% url 'generators:generator_name' %}" class="menu__link">
                             <img src="{% static "img/icons/id_2.svg" %}" alt="" class="svg">
