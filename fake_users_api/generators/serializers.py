@@ -1,46 +1,45 @@
+from calendar import c
 from rest_framework import serializers
-
+from api.serializers import UserNameSerializer
 
 class PasswordInputSerializer(serializers.Serializer):
     length = serializers.IntegerField()
     easy_to_read = serializers.BooleanField()
-    characters = serializers.ListField()
+    characters = serializers.MultipleChoiceField(choices=["uppercase", "lowercase", "numbers", "symbols"])
 
     def validate_length(self, value):
         if 1 <= value <= 50:
             return value
         raise serializers.ValidationError("Длинна от 1 до 50")
 
-
-NAME_FORMAT = {
-    0: "Russian. Full name",
-    1: "Russian. First, last name",
-    2: "Russian. Last, first name",
-    3: "Russian. Last name and initials",
-    4: "Russian. First name and initials",
-    5: "Russian. First name",
-    6: "Eng. First name, last name",
-    7: "Eng. First name"
-}
-
+class PasswordOutPutSerializer(serializers.Serializer):
+    password = serializers.CharField()
 
 class NameInputSerializer(serializers.Serializer):
     count = serializers.IntegerField()
-    lang = serializers.CharField()
-    sex = serializers.CharField()
+    lang = serializers.ChoiceField(choices=['ru', 'eng'])
+    sex = serializers.ChoiceField(choices=['any', 'male', 'female'])
 
     def validate_count(self, value):
         if 1 <= value <= 100:
             return value
         raise serializers.ValidationError("Количество от 1 до 100")
 
-    def validate_format_name(self, value):
-        if value in ('ru', 'eng'):
-            return value
-        raise serializers.ValidationError("Неверный формат")
+class NameOutPutSerializer(serializers.Serializer):
+    count = serializers.IntegerField()
+    names = UserNameSerializer(many=True)
 
-    def validate_sex(self, value):
-        if value in ['any', 'male', 'female']:
-            return value
-        raise serializers.ValidationError("Неверный пол")
+class UUIDInputSerializer(serializers.Serializer):
+    count = serializers.IntegerField()
+    version = serializers.ChoiceField(choices=(1,4))
 
+    def validate_count(self, value):
+        if 1 <= value <= 500:
+            return value
+        raise serializers.ValidationError("Количество от 1 до 500")
+
+
+class UUIDOutPutSerializer(UUIDInputSerializer):
+    # count = serializers.IntegerField()
+    # vers
+    results = serializers.ListField(child=serializers.UUIDField())

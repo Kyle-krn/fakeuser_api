@@ -82,7 +82,7 @@ $(function(){
 function AjaxPassword() {
     let pass_block = $(".received_block__text span")
     let data = {
-        lenght: $("#length_password__number").val(),
+        length: $("#length_password__number").val(),
         easy_to_read: $('#radio__easy_to_read').is(':checked'), 
         characters: function() {
             let characters = []

@@ -47,7 +47,7 @@ class UserJobSerializer(serializers.Serializer):
 
 
 class UserNameSerializer(serializers.Serializer):
-    title = serializers.CharField()
+    title = serializers.CharField(required=False)
     first_name = serializers.CharField()
     last_name = serializers.CharField()
     patronymic = serializers.CharField(allow_blank=True, allow_null=True)

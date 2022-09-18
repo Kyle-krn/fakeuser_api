@@ -28,9 +28,7 @@ schema_view = get_swagger_view(title='Pastebin API')
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('generators/', include('generators.urls', namespace="generators")),
-    # path('parse/', include('parse.urls', namespace="parse")),
     path('api/', include('api.urls', namespace='api')),
-    # path('', TemplateView.as_view(template_name="api.html"), name='api_documentation'),
     path('i18/', include('django.conf.urls.i18n'))
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
@@ -42,7 +40,4 @@ urlpatterns += [
 
 urlpatterns += i18n_patterns(
     path('', TemplateView.as_view(template_name="api.html"), name='api_documentation'),
-    # path('generate_password/', views.TemplateView.as_view(), name="generator_password")
-    path('generators/', include('generators.urls', namespace="generators"))
-
 )
