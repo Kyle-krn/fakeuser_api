@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from generators.utils import NATIONALITY
+from generators.utils import NATIONALITY, USER_ACCEPT_FIELDS, generate_password
 
 class LocationCoordinatesSerializer(serializers.Serializer):
     lat = serializers.FloatField()
@@ -81,13 +81,31 @@ class UserResponseSerializer(serializers.Serializer):
 
 
 class UserRequestSerialzer(serializers.Serializer):
-    gender = serializers.ChoiceField(choices=['male', 'female'], required=False, help_text='Select gender')
-    local = serializers.MultipleChoiceField(choices=NATIONALITY, required=False)
+    gender = serializers.ChoiceField(choices=['male', 'female'], required=False, allow_blank=True, allow_null=True, help_text='Select gender')
+    local = serializers.MultipleChoiceField(choices=NATIONALITY, required=False, allow_blank=True, allow_null=True)
     count = serializers.IntegerField(default=1, required=False)
-    include = serializers.MultipleChoiceField(choices=['gender', 'name', 'timezone', 'location', 
-                                                       'email', 'login', 'job', 'dob', 
-                                                       'registered','phone','photo','nat', 'seed', 'ssn'], required=False)
-    exclude = serializers.MultipleChoiceField(choices=['gender', 'name', 'timezone', 'location', 
-                                                       'email', 'login', 'job', 'dob', 
-                                                       'registered','phone','photo','nat', 'seed', 'ssn'], required=False)
-    seed = serializers.CharField(required=False)
+    include = serializers.MultipleChoiceField(choices=USER_ACCEPT_FIELDS, required=False)
+    exclude = serializers.MultipleChoiceField(choices=USER_ACCEPT_FIELDS, required=False)
+    seed = serializers.CharField(required=False, allow_blank=True, allow_null=True)
+
+    def validate_gender(self, value):
+        if value in ('male', 'female', None):
+            return value
+        return None
+    
+    def validate_local(self, value):
+        return value if len(value) > 0 else ['us', ]
+
+    def validate_count(self, value):
+        if value < 1:
+            return 1
+        elif value > 700:
+            return 700
+        else:
+            return value
+
+    def validate_include(self, value):
+        return value if len(value) > 0 else USER_ACCEPT_FIELDS
+
+    def validate_seed(self, value):
+        return value if value else generate_password(length=15)

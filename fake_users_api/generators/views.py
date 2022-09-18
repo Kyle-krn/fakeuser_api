@@ -20,8 +20,9 @@ class TemplateView(generic.TemplateView):
     )
 @api_view(['GET'])
 def generate_password_ajax(request):
+    print(request.query_params.get('length'))
     serializer = serializers.PasswordInputSerializer(data = {
-        'length ': request.query_params.get('length'),
+        'length': request.query_params.get('length'),
         'easy_to_read': request.query_params.get('easy_to_read'),
         'characters': request.query_params.getlist('characters')
     })
@@ -33,6 +34,7 @@ def generate_password_ajax(request):
         output_serializer.is_valid()
         return Response(output_serializer.data, status=status.HTTP_200_OK, headers={'Access-Control-Allow-Origin': '*'})
     else:
+        print(serializer.errors)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST, headers={'Access-Control-Allow-Origin': '*'})
 
 

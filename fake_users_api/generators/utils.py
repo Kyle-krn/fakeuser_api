@@ -15,6 +15,10 @@ NATIONALITY = ['ru', 'us', 'aze', 'bgd', 'cze', 'dnk', 'deu', 'grc', 'chl']
 
 LOCAL_LITERAL = Literal['ru', 'us', 'aze', 'bgd', 'cze', 'dnk', 'deu', 'grc', 'chl']
 
+USER_ACCEPT_FIELDS = ['gender', 'name', 'timezone', 'location', 
+                      'email', 'login', 'job', 'dob', 
+                      'registered','phone','photo','nat', 'ssn']
+
 PHONE_CODE = {
     'country_code': {
         'ru': '+7',
@@ -203,25 +207,40 @@ class RandomUser:
     def __init__(self,
                  user_faker: Faker,
                  photo_models: List,
+                 return_fields: List[str],
                  gender: Literal['male', 'female'] = None, 
                  localization: List = None
                  ) -> None:
+        self.return_fields = return_fields
+
         self.gender = gender if gender in ('male', 'female') else random.choice(('male', 'female')) #643ms
         self.localization = localization if localization in NATIONALITY else 'us'
         locale, nat = func_locale(self.localization)
         self.faker = user_faker[locale] #618ms
         self.nat = nat #623ms
-        self.__init_name() #978ms
-        self.__init_address() #3s
-        self.email = self.faker.email() #3s
-        self.__init_login() #3.68s
-        self.__init_job()
+        if 'name' in self.return_fields:
+            self.__init_name() #978ms
+        if 'location' in self.return_fields:
+            self.__init_address() #3s
+        if 'location' not in self.return_fields and 'timezone' in self.return_fields:
+             self.timezone = generate_timezone()
+        if 'email' in self.return_fields:
+            self.email = self.faker.email() #3s
+        if 'login' in self.return_fields:
+            self.__init_login() #3.68s
+        if 'job' in self.return_fields:
+            self.__init_job()
         self.age = None
-        self.__init_photo(photo_models[0 if self.gender == 'male' else 1])
-        self.__init_dob()
-        self.registered = random_datetime()
-        self.__init_phone_number()
-        self.__init_ssn()
+        if 'photo' in self.return_fields:
+            self.__init_photo(photo_models[0 if self.gender == 'male' else 1])
+        if 'dob' in self.return_fields:
+            self.__init_dob()
+        if 'registered' in self.return_fields:
+            self.registered = random_datetime()
+        if 'phone' in self.return_fields:
+            self.__init_phone_number()
+        if 'ssn' in self.return_fields:
+            self.__init_ssn()
         self.__accept_fields = ['gender', 'name', 'timezone', 'location', 
                                 'email', 'login', 'job', 'dob', 
                                 'registered','phone','photo','nat', 'ssn']
@@ -238,7 +257,8 @@ class RandomUser:
         tz_name, self.location = random_address(self.localization, self.faker) #2.19s
         if self.localization == 'bgd':
             tz_name = 'Asia/Dhaka'
-        self.timezone = generate_timezone(tz_name)
+        if 'timezone' in self.return_fields:
+            self.timezone = generate_timezone(tz_name)
 
     def __init_photo(self, photo_models) -> None:
         photo_model = random.choice(photo_models)
@@ -280,12 +300,6 @@ class RandomUser:
     def __init_ssn(self):
         self.ssn = self.faker.ssn() if self.localization != 'dnk' else None
 
-    def return_dict(self, 
-                    include: List[str] = [], 
-                    exclude: List[str] = []) -> dict:
-        fields = [i for i in include if i in self.__accept_fields]
-        if len(fields) == 0:
-            fields = self.__accept_fields
-        fields = [i for i in fields if i not in exclude]
-        return {i: getattr(self, i) for i in fields if i in self.__dict__}
+    def return_dict(self) -> dict:
+        return {i: getattr(self, i) for i in self.return_fields if i in self.__dict__}
         
