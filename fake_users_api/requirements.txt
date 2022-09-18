@@ -1,0 +1,13 @@
+django==4.1.1
+celery==5.2.7
+django-modeltranslation==0.18.4
+djangorestframework==3.13.1
+drf-spectacular==0.24.0
+django-cors-headers==3.13.0
+psycopg2-binary==2.9.3
+vk-api==11.9.9
+deepface==0.0.75
+faker==14.2.0
+djangorestframework-xml==2.0.0
+djangorestframework-yaml==2.0.0
+gunicorn==20.1.0

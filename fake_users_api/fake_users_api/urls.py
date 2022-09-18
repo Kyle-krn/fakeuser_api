@@ -16,14 +16,11 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
-from rest_framework_swagger.views import get_swagger_view
-from rest_framework.urlpatterns import format_suffix_patterns
-from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
+from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from generators.views import TemplateView
 from django.conf.urls.i18n import i18n_patterns
 
 from generators import views
-schema_view = get_swagger_view(title='Pastebin API')
 
 urlpatterns = [
     path('admin/', admin.site.urls),

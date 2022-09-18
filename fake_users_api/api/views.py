@@ -11,7 +11,7 @@ from faker import Faker
 import random
 from . import serializers
 from . import models
-
+from .utils import get_client_ip
 
 @extend_schema(
         parameters=[
@@ -39,7 +39,6 @@ class ApiView(APIView):
     def get(self, request, format=None):
         params = self.get_query_params()
         return_fields = [field for field in params['include'] if field not in params['exclude']]
-        print(return_fields)
         faker = Faker(['ru_RU', 'en_US', 'az_AZ', 'bn_BD', 'cs_CZ', 'da_DK', 'de_DE', 'el_GR', 'es_CL'])
         faker.seed_instance(params['seed'])
         random.seed(params['seed'])

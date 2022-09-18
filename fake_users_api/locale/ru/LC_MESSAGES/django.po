@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-17 11:24+0300\n"
+"POT-Creation-Date: 2022-09-18 12:04+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -57,7 +57,7 @@ msgid "How to use"
 msgstr "Как использовать?"
 
 #: api/templates/api.html:65 api/templates/api.html:119
-#: generators/templates/name.html:65
+#: generators/templates/name.html:79
 msgid "Results"
 msgstr "Ответ"
 
@@ -217,157 +217,162 @@ msgstr ""
 msgid "If you want everything except for login data"
 msgstr "Если вы хотите все поля, кроме login"
 
-#: common_temlates/header.html:39
+#: common_temlates/header.html:30
 msgid "Generate password"
 msgstr "Генератор паролей"
 
-#: common_temlates/header.html:45
+#: common_temlates/header.html:36
 msgid "Generate nickname"
 msgstr "Генератор никнейма"
 
-#: common_temlates/header.html:51
+#: common_temlates/header.html:42
 msgid "Generate name"
 msgstr "Генератор имен"
 
-#: common_temlates/header.html:57 generators/templates/uuid.html:9
+#: common_temlates/header.html:48 generators/templates/uuid.html:10
 msgid "Generate UUID"
 msgstr "Генератор UUID"
 
-#: common_temlates/header.html:63
+#: common_temlates/header.html:54
 msgid "API"
 msgstr ""
 
-#: generators/templates/name.html:7
-#, fuzzy
-#| msgid "Generate name"
+#: generators/templates/name.html:9
 msgid "Generator name"
 msgstr "Генератор имен"
 
-#: generators/templates/name.html:15
+#: generators/templates/name.html:17
 msgid "First name, last name and patronymic generator"
 msgstr "Генератор имён"
 
-#: generators/templates/name.html:24
+#: generators/templates/name.html:26
 msgid "Format"
 msgstr "Формат"
 
-#: generators/templates/name.html:26 generators/templates/name.html:27
-#: generators/templates/name.html:28 generators/templates/name.html:29
 #: generators/templates/name.html:30 generators/templates/name.html:31
+#: generators/templates/name.html:32 generators/templates/name.html:33
+#: generators/templates/name.html:34 generators/templates/name.html:35
+#: generators/templates/name.html:41 generators/templates/name.html:42
+#: generators/templates/name.html:43 generators/templates/name.html:44
+#: generators/templates/name.html:45 generators/templates/name.html:46
 msgid "Russian"
 msgstr "Русский"
 
-#: generators/templates/name.html:26
+#: generators/templates/name.html:30 generators/templates/name.html:41
 msgid "Full name"
 msgstr "ФИО"
 
-#: generators/templates/name.html:27 generators/templates/name.html:32
+#: generators/templates/name.html:31 generators/templates/name.html:36
+#: generators/templates/name.html:39 generators/templates/name.html:42
 msgid "First, last name"
 msgstr "Имя, фамилия"
 
-#: generators/templates/name.html:28
+#: generators/templates/name.html:32 generators/templates/name.html:43
 msgid "Last, first name"
 msgstr "Фамилия, имя"
 
-#: generators/templates/name.html:29
+#: generators/templates/name.html:33 generators/templates/name.html:44
 msgid "Last name and initials"
 msgstr "Фамилия и инициалы"
 
-#: generators/templates/name.html:30
+#: generators/templates/name.html:34 generators/templates/name.html:45
 msgid "First name and initials"
 msgstr "Имя и инициалы"
 
-#: generators/templates/name.html:31 generators/templates/name.html:33
+#: generators/templates/name.html:35 generators/templates/name.html:37
+#: generators/templates/name.html:40 generators/templates/name.html:46
 msgid "First name"
 msgstr "Имя"
 
-#: generators/templates/name.html:32 generators/templates/name.html:33
+#: generators/templates/name.html:36 generators/templates/name.html:37
+#: generators/templates/name.html:39 generators/templates/name.html:40
 msgid "Eng"
 msgstr "Английский"
 
-#: generators/templates/name.html:39
+#: generators/templates/name.html:53
 msgid "Sex"
 msgstr "Пол"
 
-#: generators/templates/name.html:41
+#: generators/templates/name.html:55
 msgid "Any"
 msgstr "Любой"
 
-#: generators/templates/name.html:42
+#: generators/templates/name.html:56
 msgid "Male"
 msgstr "Мужской"
 
-#: generators/templates/name.html:43
+#: generators/templates/name.html:57
 msgid "Female"
 msgstr "Женский"
 
-#: generators/templates/name.html:48
+#: generators/templates/name.html:62
 msgid "Count"
 msgstr "Количество"
 
-#: generators/templates/name.html:51
+#: generators/templates/name.html:65
 msgid "Get"
 msgstr "Получить"
 
-#: generators/templates/name.html:55
+#: generators/templates/name.html:69
 msgid ""
 "Generates random names, Russian or English, in various formats. For Russian "
 "names, the generation of both full names and their various variations, "
 "including initials, is supported."
 msgstr ""
-"Генератор случайных имен, на русском и англиском языках, в различных форматах."
-"Для русских имен поддерживается генерация как полных имён, так и различных вариаций, "
-"включая инициалы."
+"Генератор случайных имен, на русском и англиском языках, в различных "
+"форматах.Для русских имен поддерживается генерация как полных имён, так и "
+"различных вариаций, включая инициалы."
 
-#: generators/templates/name.html:58
+#: generators/templates/name.html:72
 msgid ""
 "Name and surname generator will help you get random results of both Russian "
 "and English names. They are formed on the basis of mixing the input data. "
 "The generator of random names and surnames will allow you to quickly come up "
 "with an online pseudonym in Latin or Cyrillic."
 msgstr ""
-"Генератор поможет вам получить случайные результаты как русских, так и английских имен. "
-"Они формируются на основе смешивания входных данных. Генератор случайных имен и фамилий позволит "
-"вам быстро придумать онлайн-псевдоним на латинице или кириллице."
+"Генератор поможет вам получить случайные результаты как русских, так и "
+"английских имен. Они формируются на основе смешивания входных данных. "
+"Генератор случайных имен и фамилий позволит вам быстро придумать онлайн-"
+"псевдоним на латинице или кириллице."
 
-#: generators/templates/name.html:60
+#: generators/templates/name.html:74
 msgid ""
 "The received data can be formatted as a list using various separators, "
 "including for insertion into spreadsheets and documents."
 msgstr ""
-"Полученные данные можно оформить в виде списка с использованием различных разделителей, "
-"в том числе для вставки в электронные таблицы и документы."
+"Полученные данные можно оформить в виде списка с использованием различных "
+"разделителей, в том числе для вставки в электронные таблицы и документы."
 
-#: generators/templates/name.html:72
+#: generators/templates/name.html:86
 msgid "Block"
 msgstr "Блок"
 
-#: generators/templates/name.html:76
+#: generators/templates/name.html:90
 msgid "Text"
 msgstr "Текст"
 
-#: generators/templates/name.html:89
+#: generators/templates/name.html:103
 msgid "Line break"
 msgstr "Перенос строки"
 
-#: generators/templates/name.html:90
+#: generators/templates/name.html:104
 msgid "comma and space"
 msgstr "запятая и пробел"
 
-#: generators/templates/name.html:91
+#: generators/templates/name.html:105
 msgid "semicolon and space"
 msgstr "точка с запятой и пробел"
 
-#: generators/templates/name.html:92
+#: generators/templates/name.html:106
 msgid "comma"
 msgstr "запятая"
 
-#: generators/templates/name.html:93
+#: generators/templates/name.html:107
 msgid "semicolon"
 msgstr "точка с запятой"
 
-#: generators/templates/name.html:99 generators/templates/name.html:107
-#: generators/templates/uuid.html:42 generators/templates/uuid.html:71
+#: generators/templates/name.html:113 generators/templates/name.html:121
+#: generators/templates/uuid.html:43 generators/templates/uuid.html:72
 msgid "Copy"
 msgstr "Копировать"
 
@@ -431,48 +436,47 @@ msgstr "Цифры"
 msgid "Symbols"
 msgstr "Символы"
 
-#: generators/templates/uuid.html:4
-#, fuzzy
-#| msgid "Generate UUID"
+#: generators/templates/uuid.html:5
 msgid "Generator UUID"
 msgstr "Генератор UUID"
 
-#: generators/templates/uuid.html:10
+#: generators/templates/uuid.html:11
 msgid "Use our online generator to instantly create random UUID/GUID"
 msgstr "Используйте наш онлайн-генератор для создания случайных UUID/GUID"
 
-#: generators/templates/uuid.html:31 generators/templates/uuid.html:59
+#: generators/templates/uuid.html:32 generators/templates/uuid.html:60
 #, fuzzy
 #| msgid "Generate password"
 msgid "Generator"
 msgstr "Генератор паролей"
 
-#: generators/templates/uuid.html:43 generators/templates/uuid.html:72
+#: generators/templates/uuid.html:44 generators/templates/uuid.html:73
 msgid "Delete"
 msgstr "Удалить"
 
-#: generators/templates/uuid.html:49
+#: generators/templates/uuid.html:50
 msgid "What is a Version 1 UUID"
 msgstr ""
 
-#: generators/templates/uuid.html:52
+#: generators/templates/uuid.html:53
 msgid ""
 "A Version 1 UUID is a universally unique identifier that is generated using "
 "a timestamp and the MAC address of the computer on which it was generated."
 msgstr ""
-"UUIDv1 - это универсальный уникальный идентификатор, который генерируется с использованием "
-"временной метки и MAC-адреса компьтера, на котором он был создан."
+"UUIDv1 - это универсальный уникальный идентификатор, который генерируется с "
+"использованием временной метки и MAC-адреса компьтера, на котором он был "
+"создан."
 
-#: generators/templates/uuid.html:78
+#: generators/templates/uuid.html:79
 msgid "What is a Version 4 UUID"
 msgstr ""
 
-#: generators/templates/uuid.html:81
+#: generators/templates/uuid.html:82
 msgid ""
 "A Version 4 UUID is a universally unique identifier that is generated using "
 "random numbers. The Version 4 UUIDs produced by this site were generated "
 "using a secure random number generator"
 msgstr ""
-"UUIDv4 - это универсальный уникальный идентификатор, который генерируется с использованием "
-"случайных чисел. UUIDv4 созданные этим сайтом, были сгенерированы с использованием безопасного "
-"генератора случайных чисел"
+"UUIDv4 - это универсальный уникальный идентификатор, который генерируется с "
+"использованием случайных чисел. UUIDv4 созданные этим сайтом, были "
+"сгенерированы с использованием безопасного генератора случайных чисел"
