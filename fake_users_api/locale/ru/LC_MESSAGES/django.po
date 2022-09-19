@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-18 12:04+0300\n"
+"POT-Creation-Date: 2022-09-19 19:52+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,23 +30,23 @@ msgstr "Привет, меня зовут"
 
 #: api/templates/api.html:23
 msgid "Name"
-msgstr "Имя"
+msgstr "Name"
 
 #: api/templates/api.html:35
 msgid "Birthday"
-msgstr "День рождения"
+msgstr "Birthday"
 
 #: api/templates/api.html:41
 msgid "Address"
-msgstr "Адрес"
+msgstr "Address"
 
 #: api/templates/api.html:47
 msgid "Phone"
-msgstr "Телефон"
+msgstr "Phone"
 
 #: api/templates/api.html:53
 msgid "Password"
-msgstr "Пароль"
+msgstr "Password"
 
 #: api/templates/api.html:61
 msgid "Navigation"
@@ -480,3 +480,8 @@ msgstr ""
 "UUIDv4 - это универсальный уникальный идентификатор, который генерируется с "
 "использованием случайных чисел. UUIDv4 созданные этим сайтом, были "
 "сгенерированы с использованием безопасного генератора случайных чисел"
+
+#, fuzzy
+#~| msgid "Russian"
+#~ msgid "Russia"
+#~ msgstr "Русский"

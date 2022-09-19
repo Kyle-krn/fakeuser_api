@@ -83,7 +83,7 @@ $secondary_color: #B88ACB;
         
                             & .text {
                                 opacity: 1;
-                                transform: translateY(10px);
+                                transform: translateY(13px);
                             }
                         }
                     }
@@ -162,14 +162,11 @@ $secondary_color: #B88ACB;
         
                         & .text {
                             position: absolute;
-                            color: var(--clr);
+                            color: rgb(105, 105, 105);
                             font-weight: 300;
-                            // font-size: 0.75em;
-                            font-size: 17px;
+                            font-size: 15px;
                             @media (max-width: 400px) {
-                                // font-size: 15px;
                             }
-                            // letter-spacing: 0.05em;
                             transition: 0.5s;
                             opacity: 0;
                             transform: translateY(20px);
@@ -291,6 +288,7 @@ $secondary_color: #B88ACB;
         margin: 0 0 24px 0;
         font-size: 18px;
         line-height: 19px;
+        
         @media (max-width: 555px) {
             font-size: 16px;
         }

@@ -683,6 +683,14 @@ pre {
   }
 }
 
+.img_block_404 {
+  text-align: center;
+  margin: auto auto;
+}
+.img_block_404 img {
+  width: 100%;
+}
+
 .light_blue {
   color: #67C8F6;
 }

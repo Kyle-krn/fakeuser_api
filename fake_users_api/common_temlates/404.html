@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="img_block_404">
+    {% if 'ab'|random == 'a' %}
+        <img src="{% static "img/404_1.png" %}" alt="" srcset="">
+    {% else %}
+        <img src="{% static "img/404_2.png" %}" alt="" srcset="">
+    {% endif %}
+</div>
+{% endblock %}

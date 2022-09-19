@@ -372,4 +372,13 @@ pre {
     }
 }
 
+.img_block_404{
+    // display: none;
+    text-align: center;
+    margin: auto auto;
+    & img {
+        width: 100%;
+    }
+}
+
 @import "colors";

@@ -86,7 +86,7 @@
 }
 .content__api .user__panel .user__navigation ul li.active .list__item .text {
   opacity: 1;
-  transform: translateY(10px);
+  transform: translateY(13px);
 }
 .content__api .user__panel .user__navigation ul li:nth-child(1).active ~ .indicator {
   transform: translateX(0px);
@@ -169,9 +169,9 @@
 }
 .content__api .user__panel .user__navigation ul li .list__item .text {
   position: absolute;
-  color: var(--clr);
+  color: rgb(105, 105, 105);
   font-weight: 300;
-  font-size: 17px;
+  font-size: 15px;
   transition: 0.5s;
   opacity: 0;
   transform: translateY(20px);
