@@ -92,7 +92,7 @@ function AjaxPassword() {
             return characters
         }()
     }
-    GetAJAX('generators/ajax_password/', data).done(function(data){
+    GetAJAX('/generators/ajax_password/', data).done(function(data){
         pass_block.animate({top: '-=100'}, 200, function(){
             $(".received_block__text span").text(data.password);
         })

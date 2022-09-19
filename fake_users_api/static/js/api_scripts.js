@@ -36,7 +36,7 @@ $('.user__photo').click(UserApiAjax)
 
 let user_data; 
 function UserApiAjax() {
-      let url = $.cookie('django_language') == 'en' ? 'api/': 'api/?local=ru'
+      let url = $.cookie('django_language') == 'en' ? '/api/': '/api/?local=ru'
       GetAJAX(url=url).done(function (data) {
         user_data = data.results[0];
         $('#info__text').text(user_data.name.first_name + " " + user_data.name.last_name);

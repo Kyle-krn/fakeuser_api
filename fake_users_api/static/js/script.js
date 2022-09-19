@@ -42,7 +42,7 @@ function Alert(text) {
 
 function GetAJAX(url, data) {
   return $.ajax({
-    url: 'http://127.0.0.1:8000/' + url,
+    url: url,
     traditional: true,
     data: data,
         dataType: 'json',

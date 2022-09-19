@@ -27,7 +27,10 @@ urlpatterns = [
     path('generators/', include('generators.urls', namespace="generators")),
     path('api/', include('api.urls', namespace='api')),
     path('i18/', include('django.conf.urls.i18n'))
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
+
+if settings.DEBUG:
+    urlpatterns += [static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)]
 
 
 urlpatterns += [

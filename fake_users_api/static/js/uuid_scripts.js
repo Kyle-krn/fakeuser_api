@@ -32,7 +32,7 @@ $(function(){
         if (!divs_uuid.length) {
             let count = $(`#uuid${version}_input_id`).val()
             $.ajax({
-                url: 'http://127.0.0.1:8000/generators/ajax_uuid/',
+                url: '/generators/ajax_uuid/',
                 traditional: true,
                 async: false,
                 data: {count:count, version: version},
@@ -89,7 +89,7 @@ function MultipleButton(version){
 }
 
 function AjaxReceivedUUID(count=1, version=4, multiple=false){
-    GetAJAX(url="generators/ajax_uuid/", 
+    GetAJAX(url="/generators/ajax_uuid/", 
             data={count: count, version: version}).done(function (data) {
                 if (multiple){
                     MultipleRecived(version, data.results)

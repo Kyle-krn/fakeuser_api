@@ -1,0 +1,53 @@
+version: '3.7'
+
+services:
+  web:
+    build: ./fake_users_api
+    command: sh -c "python3 manage.py migrate && gunicorn fake_users_api.wsgi:application --bind 0.0.0.0:8000"
+    #command: sh -c "python3 manage.py migrate && python3 manage.py runserver"
+    volumes:
+     - ./fake_users_api:/fake_user_api
+     - static_volume:/fake_user_api/static
+     - media:/fake_user_api/media
+    expose:
+      - 8000
+    #ports:
+    #   - 8000:8000
+    env_file:
+      - ./fake_users_api/.env
+    depends_on:
+      - db
+  db:
+    image: postgres:12
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    env_file:
+      - ./fake_users_api/.env
+  redis:
+    image: redis:alpine
+  celery:
+    restart: always
+    build: ./fake_users_api
+    command: celery -A fake_users_api worker
+    volumes:
+      - ./fake_users_api:/fake_user_api
+    env_file:
+      - ./fake_users_api/.env
+    depends_on:
+      - db
+      - redis
+      - web
+  nginx:
+    build: ./nginx
+    ports:
+      - 80:80
+    depends_on:
+      - web
+    volumes:
+      - static_volume:/fake_user_api/static
+      - media:/fake_user_api/media
+
+volumes:
+  postgres_data:
+  static_volume:
+  media:

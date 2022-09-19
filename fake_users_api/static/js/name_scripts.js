@@ -61,7 +61,7 @@ function AjaxName() {
         lang: format_name == 6 || format_name == 7? 'eng': 'ru',
         sex: $("#sex_name").val()  
     }
-    GetAJAX('generators/ajax_name/', input_data).done(function(data){
+    GetAJAX('/generators/ajax_name/', input_data).done(function(data){
             $("#name__null").css("display", "none")
             InputName(data, format_name)
             $("#name__results").css("display", "flex")
