@@ -23,6 +23,9 @@ class UserPhoto(models.Model):
     class Meta:
         db_table = "user_photo"
 
+    def __str__(self) -> str:
+        return self.gender + " | " + str(self.age) 
+
 
 class UserName(models.Model):
     first_name = models.CharField(max_length=255, unique=True, null=True)

@@ -99,9 +99,9 @@ function InputName(data, format) {
 }
 
 
-$(document).on('focusin', '#textarea_params', function(){
+$(document).on('click', '#textarea_params', function(){
     $(this).data('val', $(this).val());
-    $("#textarea_params").blur()
+    // $("#textarea_params").blur()
 }).on('change','#textarea_params', function(){
     let sep = GetTextAreaSep($(this).data('val'));
     let text = $("#textarea_name").text();

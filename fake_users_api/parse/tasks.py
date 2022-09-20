@@ -6,18 +6,26 @@ import os
 import requests
 from bs4 import BeautifulSoup
 from typing import Literal
+from urllib.error import URLError
 
 @shared_task
 def parse_user_info(group_id: str):  
     offset = 0
     group_members_info = utils.Vk_api.get_group_members(group_id=group_id, fields="photo_400_orig", offset=offset)
+    if os.path.exists('media/images') is False:
+        os.mkdir('media/images')
+        os.mkdir('media/images/photo')
+        os.mkdir('media/images/photo_100')
+        os.mkdir('media/images/photo_200')
     while len(group_members_info) > 0:
         for member in group_members_info:
-            # print(member)
             if "photo_400_orig" not in member:
                 continue
-            # print(member['photo_400_orig'])
-            img = utils.get_avatar(member['photo_400_orig'])
+            try:
+                img = utils.get_avatar(member['photo_400_orig'])
+            except URLError:
+                print("URLError")
+                continue
             if img is None:
                 continue
             count = api_models.UserPhoto.objects.all().count()

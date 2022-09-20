@@ -35,7 +35,6 @@ def get_avatar(url) -> Union[None, np.ndarray]:
         return
 
     for (x, y, w, h) in results:
-        # img = img[y:y + (h), x:x + (w)]
         img = img[y-50:y + (h+50), x-50:x + (w+50)]
     if len(img) == 0:
         return

@@ -10,5 +10,8 @@ class VkGroup(models.Model):
         self.group_name = group_info['name']
         return super().save(*args, **kwargs)
 
+    def __str__(self) -> str:
+        return self.group_name
+
     class Meta:
         db_table = 'vk_group'
