@@ -616,6 +616,12 @@ ul.errorlist li:not(:last-child) {
 pre {
   background-color: rgb(48, 46, 46);
   overflow: scroll;
+  padding: 0 0 0 10px;
+}
+@media (max-width: 555px) {
+  pre {
+    padding: 0 0 0 5px;
+  }
 }
 
 .received_block {

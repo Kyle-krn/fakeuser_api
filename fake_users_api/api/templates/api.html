@@ -92,13 +92,13 @@
                     </div>
                     <pre id="pre"><div class="code__jquery">
 <span class="light_blue">$</span><span class="white">.</span><span class="light_yellow">ajax</span><span class="pink">(</span><span class="blue">{</span>
-<span class="light_blue">url:</span> <span class="light_pink">'http://127.0.0.1:8000/api/'</span><span class="white">,</span>
+<span class="light_blue">url:</span> <span class="light_pink">'https://fakeuser.ru/api/'</span><span class="white">,</span>
 <span class="light_blue">dataType:</span> <span class="light_pink">'json'</span><span class="white">,</span>
 <span class="light_yellow">success:</span> <span class="blue">function</span><span class="yellow">(</span><span class="light_blue">data</span><span class="yellow">){</span>
     <span class="light_blue">console</span><span class="white">.</span><span class="span light_yellow">log</span><span class="pink">(</span><span class="light_blue">data</span><span class="pink">)</span><span class="white">;</span>
 <span class="yellow">}</span><span class="blue">}</span><span class="pink">)</span></div><div class="code__js">
 <span class="dark_blue">const</span> <span class="blue">xhr</span> <span class="white">=</span> <span class="dark_blue">new</span> <span class="turquoise">XMLHttpRequest()</span><span class="white">;</span>
-<span class="blue">xhr</span><span class="white">.</span><span class="light_yellow">open</span><span class="pink">(</span><span class="light_pink">'GET'</span><span class="white">,</span> <span class="light_pink">'http://127.0.0.1:8000/api/'</span><span class="pink">)</span><span class="white">;</span>
+<span class="blue">xhr</span><span class="white">.</span><span class="light_yellow">open</span><span class="pink">(</span><span class="light_pink">'GET'</span><span class="white">,</span> <span class="light_pink">'https://fakeuser.ru/api/'</span><span class="pink">)</span><span class="white">;</span>
 <span class="blue">xhr</span><span class="white">.</span><span class="light_yellow">onload</span> <span class="white">=</span> <span class="dark_blue">function</span> <span class="pink">() {</span>
 <span class="pink">if</span> <span class="dark_blue">(</span><span class="blue">xhr.status</span> <span class="white">!==</span> <span class="light_yellow">200</span><span class="dark_blue">)</span> <span class="pink">return</span><span class="white">;</span>
 <span class="dark_blue">const</span> <span class="blue">response</span> <span class="white">=</span> <span class="light_blue">JSON</span><span class="white">.</span><span class="light_yellow">parse</span><span class="dark_blue">(</span><span class="blue">xhr.response</span><span class="dark_blue">)</span><span class="white">;</span>
@@ -107,7 +107,7 @@
 <span class="blue">xhr</span><span class="white">.</span><span class="light_yellow">send</span><span class="pink">()</span><span class="white">;</span></div><div class="code__python">
 <span class="pink">import</span> <span class="turquoise">requests</span>
 
-<span class="light_blue">res</span> <span class="white">=</span> <span class="turquoise">requests</span><span class="white">.</span><span class="light_yellow">get</span><span class="yellow">(</span><span class="light_pink">'http://127.0.0.1:8000/api/'</span><span class="yellow">)</span>
+<span class="light_blue">res</span> <span class="white">=</span> <span class="turquoise">requests</span><span class="white">.</span><span class="light_yellow">get</span><span class="yellow">(</span><span class="light_pink">'https://fakeuser.ru/api/'</span><span class="yellow">)</span>
 <span class="light_yellow">print</span><span class="yellow">(</span><span class="light_blue">res</span><span class="white">.</span><span class="light_yellow">json</span><span class="pink">()</span><span class="yellow">)</span>
 </div>
                      </pre>
@@ -177,9 +177,9 @@
 },
 "phone": <span class="pink">"+18502730706"</span>,
 "photo": {
-    "small": <span class="pink">"http://127.0.0.1:8000/media/images/photo_100/48.jpg"</span>,
-    "medium": <span class="pink">"http://127.0.0.1:8000/media/images/photo_200/48.jpg"</span>,
-    "original": <span class="pink">"http://127.0.0.1:8000/media/images/photo/48.jpg"</span>
+    "small": <span class="pink">"https://fakeuser.ru/media/images/photo_100/48.jpg"</span>,
+    "medium": <span class="pink">"https://fakeuser.ru/media/images/photo_200/48.jpg"</span>,
+    "original": <span class="pink">"https://fakeuser.ru/media/images/photo/48.jpg"</span>
 },
 "nat": <span class="pink">"American"</span>
 }
@@ -196,7 +196,7 @@
                 </div>
                 <pre class="white">
 
-http://127.0.0.1:8000/api/?<span class="pink">count=10</span>
+https://fakeuser.ru/api/?<span class="pink">count=10</span>
                 </pre>
             </div>
             <div id="gender_id" class="gender__block api__block">
@@ -216,7 +216,7 @@ http://127.0.0.1:8000/api/?<span class="pink">count=10</span>
                 </div>
                 <pre class="white">
 
-http://127.0.0.1:8000/api/?<span class="pink">gender=male</span>
+https://fakeuser.ru/api/?<span class="pink">gender=male</span>
 
 </pre>
             </div>
@@ -230,7 +230,7 @@ http://127.0.0.1:8000/api/?<span class="pink">gender=male</span>
                 </div>
                 <pre class="white">
 
-http://127.0.0.1:8000/api/?<span class="pink">seed=someseed</span>
+https://fakeuser.ru/api/?<span class="pink">seed=someseed</span>
                 </pre>
             </div>
             <div id="formats_id" class="formats__block api__block">
@@ -245,7 +245,7 @@ http://127.0.0.1:8000/api/?<span class="pink">seed=someseed</span>
                 <div class="api__text">{% trans 'Just specify the format you would like returned by using the format parameter.' %}</div>
                 <pre class="white">
 
-http://127.0.0.1:8000/api/?<span class="pink">format=csv</span>
+https://fakeuser.ru/api/?<span class="pink">format=csv</span>
                 </pre>
             </div>
             <div id="nat_id" class="nationality__block api__block">
@@ -256,12 +256,12 @@ http://127.0.0.1:8000/api/?<span class="pink">format=csv</span>
                 <div class="api__text">{% trans 'You can specify a nationality like so' %}:</div>
                 <pre class="white">
 
-http://127.0.0.1:8000/api/?<span class="pink">local=ru</span>       
+https://fakeuser.ru/api/?<span class="pink">local=ru</span>       
                 </pre>
                 <div class="api__text margin-top">{% trans "Randomuser will return us nats by default. You can have some control with the nats that you'd like to have generated by specifying a comma seperated list" %}:</div>
                 <pre class="white">
 
-http://127.0.0.1:8000/api/?<span class="pink">local=ru,us,aze,bgd</span>       
+https://fakeuser.ru/api/?<span class="pink">local=ru,us,aze,bgd</span>       
                 </pre>
             </div>
             <div id="inc_exc_id" class="inc-exc__block api__block">
@@ -288,12 +288,12 @@ http://127.0.0.1:8000/api/?<span class="pink">local=ru,us,aze,bgd</span>
                 <div class="api__text">{% trans 'If you only wanted the names,nats,and locations of users' %}:</div>
                 <pre class="white">
 
-http://127.0.0.1:8000/api/?<span class="pink">include=name, nat, location</span>           
+https://fakeuser.ru/api/?<span class="pink">include=name, nat, location</span>           
                 </pre>
                 <div class="api__text margin-top">{% trans 'If you want everything except for login data' %}:</div>
                 <pre class="white">
 
-http://127.0.0.1:8000/api/?<span class="pink">exclude=login</span>           
+https://fakeuser.ru/api/?<span class="pink">exclude=login</span>           
                 </pre>
             </div>
         </div>
