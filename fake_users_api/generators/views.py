@@ -20,6 +20,9 @@ class TemplateView(generic.TemplateView):
     )
 @api_view(['GET'])
 def generate_password_ajax(request):
+    '''
+        Представление генерации пароля
+    '''
     print(request.query_params.get('length'))
     serializer = serializers.PasswordInputSerializer(data = {
         'length': request.query_params.get('length'),
@@ -47,6 +50,9 @@ def generate_password_ajax(request):
     )
 @api_view(['GET'])
 def generate_name_ajax(request):
+    '''
+        Представление генерации имени
+    '''
     serializer = serializers.NameInputSerializer(data={
         'count': request.query_params.get('count'),
         'lang': request.query_params.get('lang'),
@@ -70,6 +76,9 @@ def generate_name_ajax(request):
     )
 @api_view(['GET'])
 def generate_uuid_ajax(request):
+    '''
+        Представление генерации UUID
+    '''
     serializer = serializers.UUIDInputSerializer(data = {
         'count': request.query_params.get('count'),
         'version': request.query_params.get('version')          

@@ -43,7 +43,13 @@ services:
     volumes:
       - static_volume:/fake_user_api/static
       - media:/fake_user_api/media
-
+  certbot:
+    image: certbot/certbot
+    depends_on:
+      - nginx
+    container_name: certbot
+    volume:
+      - etc-letsencrypt:/etc/letsencrypt
 volumes:
   postgres_data:
   static_volume:

@@ -11,7 +11,7 @@ from faker import Faker
 import random
 from . import serializers
 from . import models
-from .utils import get_client_ip
+
 
 @extend_schema(
         parameters=[
@@ -21,6 +21,9 @@ from .utils import get_client_ip
         responses=serializers.UserResponseSerializer,
     )
 class ApiView(APIView):
+    '''
+        Представление генерации рандомных юзеров
+    '''
     renderer_classes = JSONRenderer, BrowsableAPIRenderer, XMLRenderer, YAMLRenderer
     serializer_class = serializers.UserResponseSerializer
 

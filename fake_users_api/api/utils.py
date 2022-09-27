@@ -1,4 +1,7 @@
 def flatten(dictionary: dict) -> dict:
+    '''
+        Разворачивает многоуровневный словарь в плоский (для отдачи CSV)
+    '''
     res = {}
     for k, v in dictionary.items():
         if not isinstance(v, dict):
@@ -13,6 +16,9 @@ def flatten(dictionary: dict) -> dict:
 
 
 def get_client_ip(request):
+    '''
+        Получение IP адреса клиента
+    '''
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
     if x_forwarded_for:
         ip = x_forwarded_for.split(',')[0]
